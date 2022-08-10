@@ -1,0 +1,25 @@
+.card_outer.statistics {
+    min-height: 377px;
+}
+.table>:not(:first-child){
+    border-top: unset;
+}
+.table>thead>tr>th {
+    font-weight: 300;
+    font-size: 14px;
+}
+.table>thead {
+    vertical-align: bottom;
+    background: #e8e9ef;
+    color: #868e96;
+    
+}
+table.table {
+    border: 1px solid #ddd;
+}
+/* media query starts here */
+@media(max-width:991px){
+    .submit_btn label, .submit_btn br {
+        display: none;
+    }
+}

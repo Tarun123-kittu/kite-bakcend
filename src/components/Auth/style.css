@@ -1,0 +1,53 @@
+.login-content {
+    text-align: center;
+}
+
+.login-content {
+    width: 408px;
+    position: relative;
+    z-index: 1;
+    margin: auto;
+}
+.log_in_form {
+    background: #FFFFFF;
+    box-shadow: 0px 20px 50px rgb(0 0 0 / 10%);
+    border-radius: 31px;
+    padding: 50px 30px;
+    position: relative;
+    z-index: 2;
+}
+.login-logo {
+    margin-bottom: 30px;
+}
+.login-content input {
+    border: transparent;
+    border-bottom: 0.5px solid #000000;
+    border-radius: unset;
+    color: #000;
+}
+.login-content button[type="submit"] {
+    background: #3D59F9;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+.login-logo img {
+    width: 230px;
+}
+.sufee-login {
+    background-image: url('../../assets/images/background_bg.png');
+    height: 100vh;
+    justify-content: center;
+}
+.login-content::before {
+    position: absolute;
+    content: "";
+    background-image: url('../../assets/images/isotipo.png');
+    left: -126px;
+    right: 0;
+    top: -110px;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    z-index: -1;
+}
