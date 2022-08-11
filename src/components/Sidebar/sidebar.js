@@ -30,7 +30,7 @@ const handleclick = () =>{
     >
     <div className= "sidebar_inner">
       <div className='site_logo '>
-      <span className='logo_icon'><img src="assets/images/logo_glyp.png" alt="" /></span> <span className='logo_text'><img src="assets/images/logo_text.png" alt="" srcset="" /></span>
+      <span className='logo_icon'><img src="assets/images/logo_glyp.png" alt="" /></span> <span className='logo_text'><img src="assets/images/logo_text.png" alt="" srcSet="" /></span>
        <FontAwesomeIcon 
        onClick={handleclick}
      
