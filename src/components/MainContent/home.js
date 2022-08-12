@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { render } from 'react-dom';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -11,10 +14,11 @@ import { dashboardSelector, clearState, fetchdashboard } from '../../app/feature
 const Home = () => {
    const [disabledatepicker, setdiabledpicker] = useState(true)
    const [daterange, setrange] = useState("")
-   const [startend, setStartend]=useState({start: "", end: ""})
+   const [startend, setStartend] = useState({ start: "", end: "" })
    const [campaignfilter, setCampaignFilter] = useState("")
    const [formatfilter, setFormatFilter] = useState("")
    const [periodfilter, setperiodfilter] = useState("")
+   const [linegraph, setlinegraph] = useState({})
    const pickerref = useRef(null);
    const dispatch = useDispatch();
    const { overview, cpcv, egRate, ctr, views, impressions, device, format, graph, formats, campaign, isFetching, isSuccess, isError, error } = useSelector(
@@ -24,16 +28,14 @@ const Home = () => {
    useEffect(() => {
       dispatch(fetchdashboard({ filter: "", token: localStorage.getItem('token') }))
    }, [])
-
-   console.log()
    const handleApply = (event, picker) => {
       picker.element.val(
          picker.startDate.format('MM/DD/YYYY') +
          ' - ' +
          picker.endDate.format('MM/DD/YYYY')
       );
-      setStartend({start: picker.startDate.format('YYYY-MM-DD'), end:picker.endDate.format('YYYY-MM-DD')})
-      setrange(picker.startDate.format('DD/MM/YYYY')+' - ' +picker.endDate.format('DD/MM/YYYY'))
+      setStartend({ start: picker.startDate.format('YYYY-MM-DD'), end: picker.endDate.format('YYYY-MM-DD') })
+      setrange(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))
    };
    const handleCancel = (event, picker) => {
       picker.element.val('');
@@ -51,16 +53,71 @@ const Home = () => {
       setperiodfilter(value)
 
    }
-   const searchfilter=()=>{
-      let period="";
-      if(periodfilter != 'custom'){
-         period=periodfilter
-      }else if(periodfilter == 'custom'){
-
+   const searchfilter = () => {
+      let period = "";
+      if (periodfilter != 'custom') {
+         period = periodfilter
       }
-      let serchquery=`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaignfilter}&format=${formatfilter}&period=${period}`
+      let serchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaignfilter}&format=${formatfilter}&period=${period}`
       dispatch(fetchdashboard({ filter: serchquery, token: localStorage.getItem('token') }))
    }
+
+   const resetfilter=()=>{
+      window.location.reload();
+   }
+   useEffect(() => {
+      graphdraw()
+   }, [graph])
+
+   const graphdraw = () => {
+      console.log("GRAPH")
+      var count = graph.length;
+      var views = [];
+      var impressions = [];
+      var date = [];
+      var i;
+      for (i = 0; i < count; i++) {
+         views.push(graph[i].views);
+         impressions.push(graph[i].impressions);
+         date.push(graph[i].date);
+      }
+      let chartdata = {
+         chart: {
+            type: 'spline'
+         },
+         title: {
+            text: 'views and impressions'
+         },
+         xAxis: {
+            categories: date
+         },
+         yAxis: {
+            title: {
+               text: 'Numbers'
+            }
+         },
+         plotOptions: {
+            series: {
+               label: {
+                  connectorAllowed: false
+               },
+               /* pointStart: 2010 */
+            }
+         },
+         series: [{
+            name: 'Views',
+            data: views
+
+         }, {
+            name: 'Impressions',
+            data: impressions
+         }]
+      }
+      console.log(chartdata)
+      setlinegraph(chartdata);
+   }
+
+
    return (
       <div className='content_outer'>
 
@@ -97,7 +154,7 @@ const Home = () => {
                   <Col md={4} lg={3}>
                      <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Campaign</Form.Label>
-                        <Form.Select aria-label="Default select example" onChange={(e)=>{setCampaignFilter(e.target.value)}}>
+                        <Form.Select aria-label="Default select example" onChange={(e) => { setCampaignFilter(e.target.value) }}>
                            <option value="">Select</option>
                            {campaign.map((camp, index) => {
                               return (
@@ -110,7 +167,7 @@ const Home = () => {
                   <Col lg={2} md={3} >
                      <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Format</Form.Label>
-                        <Form.Select aria-label="Default select example" onChange={(e)=>{setFormatFilter(e.target.value)}}>
+                        <Form.Select aria-label="Default select example" onChange={(e) => { setFormatFilter(e.target.value) }}>
                            <option value="">Select</option>
                            {formats.map((format, index) => {
                               return (
@@ -130,7 +187,7 @@ const Home = () => {
                         </Form.Group>
                         <Form.Group className="mb-3 ms-2" controlId="formBasicEmail">
                            <Form.Label style={{ opacity: '0' }}>Reset</Form.Label> <br />
-                           <Button variant="outline-danger" >
+                           <Button variant="outline-danger" onClick={resetfilter} >
                               Reset
                            </Button>
                         </Form.Group>
@@ -189,6 +246,10 @@ const Home = () => {
                   <Col lg={9} md={12}>
                      <div className="card_outer statistics">
                         <h2>Statistics</h2>
+                        <HighchartsReact
+                           highcharts={Highcharts}
+                           options={linegraph}
+                        />
                      </div>
                   </Col>
                </Row>
@@ -230,7 +291,44 @@ const Home = () => {
                   </Col>
                   <Col lg={4} md={12}>
                      <div className="card_outer">
-                        <h2> Device Usage world Wide</h2>
+                        <HighchartsReact highcharts={Highcharts} options={
+                           {
+                              chart: {
+                                 plotBackgroundColor: null,
+                                 plotBorderWidth: null,
+                                 plotShadow: false,
+                                 type: 'pie'
+                              },
+                              title: {
+                                 text: 'Device Usage World wide'
+                              },
+                              tooltip: {
+                                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                              },
+                              accessibility: {
+                                 point: {
+                                    valueSuffix: '%'
+                                 }
+                              },
+                              credits: {
+                                 enabled: false
+                              },
+                              plotOptions: {
+                                 pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                       enabled: true,
+                                       format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                    }
+                                 }
+                              },
+                              series: [{
+                                 name: 'Device',
+                                 colorByPoint: true,
+                                 data: device
+                              }]
+                           }} />
                      </div>
                   </Col>
                </Row>
