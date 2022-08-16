@@ -308,6 +308,149 @@ return (
         </tr>
       </thead>
       <tbody>
+      {/* {(() => {
+                     if (dimension != "" || filterDate != ""){
+                        {reports?.overview?.map((value , index) =>{
+                           return (
+                              <tr>
+                              {
+                                 dimension != "" &&
+                                 <td>{value[dimension]}</td>
+                                 
+                              }
+                              {
+                                 filterDate != "" &&
+                                 <td>{value.date}</td>
+                                 
+                              }
+                              {
+                                 impressions == true &&
+                                 <td>{value.impressions}</td>
+                                 
+                              }
+                              {
+                                 views == true &&
+                                 <td>{value.views}</td>
+                                
+                              }
+                              {
+                                 clicks == true &&
+                                 <td>{value.clicks}</td>
+                                 
+                              }
+                              {
+                                 engagements == true &&
+                                 <td>{value.engagements}</td>
+                                 
+                              }
+                              {
+                                 cpcv == true &&
+                                 <>
+                                 {(() => {
+                                    if (value.format == 'Branded Video (AA)' || value.format == 'Bumper Ads / URL YouTube (KSV)' || value.format == 'Pre Roll - In stream / URL YouTube (KSV)' || value.format == 'Pre Roll 30¨ (AA / Programatic)'){
+                                        return (
+                                          <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.impressions) * 100).toFixed(2) }%</td>
+                                        )
+                                    }else{
+                                       return (
+                                          <td>N/A</td>
+                                       )
+                                    }
+                                    
+                                    return null;
+                                  })()}
+                                 
+                                  
+                                 </>
+                              }
+                              {
+                                 ctr == true &&
+                                 
+                                    <>
+                                    {(() => {
+                                    if (value.format != 'Virtual OOH - Estático' && value.format != 'Virtual OOH - GIF'){
+                                        return (
+                                          <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.clicks / value.impressions) * 100).toFixed(2) }%</td>
+                                        )
+                                    }else{
+                                       return(
+                                       <td>N/A</td>
+                                       )
+                                    }
+                                    
+                                    return null;
+                                  })()}
+               
+                                    
+                                 </>
+                              }
+                              {
+                                 egRate == true &&
+                                 
+                                    <>
+                                    {(() => {
+                                    if (value.format == 'Interstitial Tradicional (AA)' || value.format == 'Interstitial / Carousel (AA)' || value.format == 'Interstitial / Filmstrip (AA)' || value.format == 'Interstitial / Minigame (AA)'){
+                                       
+                                        return (
+                                          <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.engagements) * 100).toFixed(2) }%</td>
+                                        )
+                                    }else{
+                                       return(
+                                       <td>N/A</td>
+                                       )
+                                    }
+                                    
+                                    return null;
+                                  })()}
+               
+                                    
+                                 </>
+                              }
+                            </tr>
+               
+                           )
+                        })}
+                     }else{
+                        {
+                           impressions == true  &&
+                           <td>{reports?.overview?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)}</td>
+                     }
+                     {
+                           views == true &&
+                           <td>{reports?.overview?.map(item => item.views).reduce((prev, curr) => prev + curr, 0)}</td>
+                           
+                     }
+                     {
+                           clicks == true &&
+                           <td>{reports?.overview?.map(item => item.clicks).reduce((prev, curr) => prev + curr, 0)}</td>
+                           
+                     }
+                     {
+                           engagements == true &&
+                           <td>{reports?.overview?.map(item => item.engagements).reduce((prev, curr) => prev + curr, 0)}</td>
+                           
+                     }
+                     {
+                           cpcv == true &&
+                           <td>{ reports?.cpcv?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.cpcv.map(item => item.views).reduce((prev, curr) => prev + curr, 0) / reports.cpcv.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2) }%</td>
+                           
+                     }
+                     {
+                           ctr == true &&
+                           <td>{ reports?.ctr?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.ctr.map(item => item.clicks).reduce((prev, curr) => prev + curr, 0) / reports.ctr.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2) }%</td>
+                           
+                     }
+                     {
+                           egRate == true &&
+                           <td>{ reports?.egRate?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.egRate.map(item => item.engagements).reduce((prev, curr) => prev + curr, 0) / reports.egRate.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2) }%</td>
+                           
+                     }
+                     }
+                     
+                     return null;
+                   })()}  */}
+
+
          { (dimension != "" || filterDate != "") &&
          <>
          {reports?.overview?.map((value , index) =>{
@@ -345,38 +488,63 @@ return (
                }
                {
                   cpcv == true &&
-                  
-                     <>
-                     {(value.format == 'Branded Video (AA)' || value.format == 'Bumper Ads / URL YouTube (KSV)' || value.format == 'Pre Roll - In stream / URL YouTube (KSV)' || value.format == 'Pre Roll 30¨ (AA / Programatic)') &&
-                     <td>{ (value.impressions) == 0 ? 0 : ((value.views / value.impressions) * 100).toFixed(2) }%</td>
+                  <>
+                  {(() => {
+                     if (value.format == 'Branded Video (AA)' || value.format == 'Bumper Ads / URL YouTube (KSV)' || value.format == 'Pre Roll - In stream / URL YouTube (KSV)' || value.format == 'Pre Roll 30¨ (AA / Programatic)'){
+                         return (
+                           <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.impressions) * 100).toFixed(2) }%</td>
+                         )
+                     }else{
+                        return (
+                           <td>N/A</td>
+                        )
                      }
-                     {(value.format != 'Branded Video (AA)' || value.format != 'Bumper Ads / URL YouTube (KSV)' || value.format != 'Pre Roll - In stream / URL YouTube (KSV)' || value.format != 'Pre Roll 30¨ (AA / Programatic)') &&
-                     <td>N/A</td>
-                     }
+                     
+                     return null;
+                   })()}
+           
                   </>
                }
                {
                   ctr == true &&
                   
                      <>
-                     {(value.format != 'Virtual OOH - Estático' && value.format != 'Virtual OOH - GIF') &&
-                     <td>{ (value.impressions) == 0 ? 0 : ((value.clicks / value.impressions) * 100).toFixed(2) }%</td>
+                     {(() => {
+                     if (value.format != 'Virtual OOH - Estático' && value.format != 'Virtual OOH - GIF'){
+                         return (
+                           <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.clicks / value.impressions) * 100).toFixed(2) }%</td>
+                         )
+                     }else{
+                        return(
+                        <td>N/A</td>
+                        )
                      }
-                     {(value.format == 'Virtual OOH - Estático' && value.format == 'Virtual OOH - GIF') &&
-                     <td>N/A</td>
-                     }
+                     
+                     return null;
+                   })()}
+
+                    
                   </>
                }
                {
                   egRate == true &&
                   
                      <>
-                     {(value.format == 'Interstitial Tradicional (AA)' || value.format == 'Interstitial / Carousel (AA)' || value.format == 'Interstitial / Filmstrip (AA)' || value.format == 'Interstitial / Minigame (AA)') &&
-                     <td>{ (value.impressions) == 0 ? 0 : ((value.views / value.engagements) * 100).toFixed(2) }%</td>
+                     {(() => {
+                     if (value.format == 'Interstitial Tradicional (AA)' || value.format == 'Interstitial / Carousel (AA)' || value.format == 'Interstitial / Filmstrip (AA)' || value.format == 'Interstitial / Minigame (AA)'){
+                        
+                         return (
+                           <td>{ (value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.engagements) * 100).toFixed(2) }%</td>
+                         )
+                     }else{
+                        return(
+                        <td>N/A</td>
+                        )
                      }
-                     {(value.format != 'Interstitial Tradicional (AA)' || value.format != 'Interstitial / Carousel (AA)' || value.format != 'Interstitial / Filmstrip (AA)' || value.format != 'Interstitial / Minigame (AA)') &&
-                     <td>N/A</td>
-                     }
+                     
+                     return null;
+                   })()}
+
                   </>
                }
              </tr>
@@ -389,9 +557,8 @@ return (
          { (dimension == "" || filterDate == "") &&
             <>
             {
-                  impressions == true &&
+                  impressions == true  &&
                   <td>{reports?.overview?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)}</td>
-                  
             }
             {
                   views == true &&
