@@ -1,0 +1,30 @@
+.social_grid.youtube {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.bg_white {
+    background-color: #fff;
+    padding: 10px;
+}
+.social_image img {
+    width: 50%;
+    margin: auto;
+    height: 50px;
+}
+
+.social_image {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.social_inner_grid {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.content_outer.abstract_wrapper {
+    background: #f5fbff;
+}
+

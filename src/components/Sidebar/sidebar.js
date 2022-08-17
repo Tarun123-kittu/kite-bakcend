@@ -48,6 +48,9 @@ const handleclick = () =>{
         <li>
             <NavLink to="/reports"><div className='nav_icon'><FontAwesomeIcon icon={faFile} /></div><span className='ml-2'>Reports</span></NavLink >
         </li>
+        <li>
+            <NavLink to="/abstract"><div className='nav_icon'><FontAwesomeIcon icon={faFile} /></div><span className='ml-2'>Abstract</span></NavLink >
+        </li>
     </ul>
     
     </div>
