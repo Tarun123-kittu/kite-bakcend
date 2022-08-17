@@ -28,6 +28,10 @@ const Reports = () => {
    const [egRate, setegRate] = useState(false);
    const [showResults, setShowResults] = useState(true)
 
+   const removeEmptyParams=(url)=>{
+      return encodeURI(url.replace(/[^=&]+=(&|$)/g,"").replace(/&$/,""));
+   }
+
    const handleApply = (event, picker) => {
 
       picker.element.val(
@@ -37,6 +41,8 @@ const Reports = () => {
       );
       setStartend({ start: picker.startDate.format('YYYY-MM-DD'), end: picker.endDate.format('YYYY-MM-DD') })
       setrange(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))
+      searchquery = removeEmptyParams(`creation_date=${picker.startDate.format('DD/MM/YYYY')}+-+${picker.endDate.format('DD/MM/YYYY')}&startDate=${picker.startDate.format('YYYY-MM-DD')}&endDate=${picker.endDate.format('YYYY-MM-DD')}&campaign=${campaign}&format=${format}&period=&advertiser=${advertiser}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`)
+      fetchReports();
    };
    const handleCancel = (event, picker) => {
       picker.element.val('');
@@ -73,6 +79,13 @@ const Reports = () => {
    const handleSelectChange = (event) => {
       let value = event.target.value;
       value == 'custom' ? setDateDisable(false) : setDateDisable(true);
+      if(value != 'custom'){
+         searchquery = removeEmptyParams(`creation_date=&startDate=&endDate=&campaign=${campaign}&format=${format}&period=${value}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`);
+         fetchReports();
+         setPeriod(value) 
+      }else{
+         setPeriod("") 
+      }
    }
    const datechange = (events) =>{
       let dimnesionValue = events.target.value;
@@ -84,14 +97,31 @@ const Reports = () => {
       return percentage
    }
    const usedimension = (newdimension) => {
-      searchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${newdimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`
+      searchquery = removeEmptyParams(`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${newdimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`)
       fetchReports();
       setDimension(newdimension)
    }
    const usedatefilter = (newdatefilter) => {
-      searchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${newdatefilter}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`
+      searchquery = removeEmptyParams(`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${newdatefilter}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`)
       fetchReports();
       setFilterDate(newdatefilter)
+   }
+   const handleCampainChange=(campaignName)=>{
+      searchquery =removeEmptyParams(`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaignName}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`);
+      fetchReports();
+      setCampaign(campaignName)
+   }
+
+   const handleFormatChange=(formatName)=>{
+      searchquery = removeEmptyParams(`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${formatName}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`);
+      fetchReports();
+      setFormat(formatName)
+   }
+
+   const handleAdvertiserChange=(advertiserName)=>{
+      searchquery = removeEmptyParams(`creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiserName}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`)
+      fetchReports();
+      setAdvertiser(advertiserName) 
    }
 
    const exportData = () => {
@@ -129,6 +159,8 @@ const Reports = () => {
                 downloadLink.click();
    }
 
+   
+
   
    return (
       <div className='content_outer'>
@@ -142,7 +174,7 @@ const Reports = () => {
                         <Col  xl={2} lg={4} md={2}>
                            <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>Period</Form.Label>
-                              <Form.Select aria-label="Default select example" onChange={(e) => { handleSelectChange(e); setPeriod(e.target.value) }} >
+                              <Form.Select aria-label="Default select example" onChange={(e) => { handleSelectChange(e);}} >
                                  <option disabled={true} selected={true}>Select</option>
                                  <option value="Yesterday">Yesterday</option>
                                  <option value="month">So far this month</option>
@@ -170,7 +202,7 @@ const Reports = () => {
                         <Col md={4} lg={4} xl={2}>
                            <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>Campaign</Form.Label>
-                              <Form.Select aria-label="Default select example" onChange={e => { setCampaign(e.target.value) }}>
+                              <Form.Select aria-label="Default select example" onChange={e => { handleCampainChange(e.target.value)}}>
                                  <option disabled={true} selected={true}>Select</option>
                                  {reports?.campaign?.map((data, index) => (
                                     <option value={data.campaign} key={index}> {data.campaign}</option>
@@ -181,7 +213,7 @@ const Reports = () => {
                         <Col xl={2} lg={4} md={3}>
                            <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>Format</Form.Label>
-                              <Form.Select aria-label="Default select example" onChange={e => { setFormat(e.target.value) }}>
+                              <Form.Select aria-label="Default select example" onChange={e => { handleFormatChange(e.target.value)}}>
                                  <option disabled={true} selected={true}>Select</option>
                                  {reports?.formats?.map((data, index) => (
                                     <option value={data.format} key={index}>{data.format}</option>
@@ -192,7 +224,7 @@ const Reports = () => {
                         <Col xl={2} lg={3} md={3}>
                            <Form.Group className="mb-3" controlId="formBasicEmail">
                               <Form.Label>Advertiser</Form.Label>
-                              <Form.Select aria-label="Default select example" onChange={e => { setAdvertiser(e.target.value) }}>
+                              <Form.Select aria-label="Default select example" onChange={e => { handleAdvertiserChange(e.target.value)}}>
                                  <option disabled={true} selected={true}>Select</option>
                                  {reports?.advertiser?.map((data, index) => (
                                     <option value={data.advertiser} key={index}>{data.advertiser}</option>
@@ -308,7 +340,7 @@ const Reports = () => {
                               </div>
                            </Col>
                         </Row>
-                        <Button variant="success" type="submit" className=" d-block w-75 m-auto">Generate</Button>
+                        {/* <Button variant="success" type="submit" className=" d-block w-75 m-auto">Generate</Button> */}
                      </div>
 
                   </Form>
