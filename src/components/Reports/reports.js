@@ -1,271 +1,524 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 import './style.css'
+import axios from "axios";
+
 const Reports = () => {
-return (
-   <div className='content_outer'>
-   <div className='content'>
+   const [reports, setReports] = useState([]);
+   const [dateDisable, setDateDisable] = useState(true);
+   const [daterange, setrange] = useState("")
+   const [startend, setStartend] = useState({ start: "", end: "" })
+   const [campaign, setCampaign] = useState("");
+   const [format, setFormat] = useState("");
+   const [advertiser, setAdvertiser] = useState("");
+   const [period, setPeriod] = useState("");
+   const [dimension, setDimension] = useState("");
+   const [filterDate, setFilterDate] = useState("");
+   const [impressions, setImpressions] = useState(true);
+   const [views, setViews] = useState(false);
+   const [clicks, setClicks] = useState(false);
+   const [engagements, setEngagements] = useState(false);
+   const [cpcv, setcpcv] = useState(false);
+   const [ctr, setctr] = useState(false);
+   const [egRate, setegRate] = useState(false);
+   const [showResults, setShowResults] = useState(true)
 
-<div className='card_outer'>
-    <h2>Reports</h2>
-<div className='reports_inner'>
-   <Form >
-      <Row >
-         <Col Col lg={2} md={2}>
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Period</Form.Label>
-            <Form.Select aria-label="Default select example">
-               <option>Select</option>
-               <option value="Yesterday">Yesterday</option>
-               <option value="seven_days">Last seven days</option>
-               <option value="last_month">Last month</option>
-               <option>Custom date</option>
-            </Form.Select>
-         </Form.Group>
-         </Col>
-         <Col  md={3} lg={2}>
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Date Range</Form.Label>
-            <Form.Control type="text" placeholder="Create Date" />
-         </Form.Group>
-         </Col>
-         <Col md={4} lg={3}>
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Campaign</Form.Label>
-            <Form.Select aria-label="Default select example">
-               <option>Select</option>
-               <option value=" UIP- Sing 2 BO sustain "> UIP- Sing 2 BO sustain </option>
-               <option value=" Viacom - Paw Patrol Arg"> Viacom - Paw Patrol Arg</option>
-               <option value="Alpina - Bon Yurt Mini Masmelos">Alpina - Bon Yurt Mini Masmelos</option>
-               <option value="Alquería - Alquemix Abr- Jun">Alquería - Alquemix Abr- Jun</option>
-               <option value="Baby Alive Mar 2022">Baby Alive Mar 2022</option>
-               <option value="Caffaro - Campañas May-Ago 2022">Caffaro - Campañas May-Ago 2022</option>
-               <option value="Cajita Feliz - Clean label - GT ">Cajita Feliz - Clean label - GT </option>
-               <option value="Cajita Feliz - Clean label - NI">Cajita Feliz - Clean label - NI</option>
-               <option value="Cajita Feliz - Clean label - SV">Cajita Feliz - Clean label - SV</option>
-               <option value="Campaña 2022">Campaña 2022</option>
-               <option value="Choco Wow Febrero BTS">Choco Wow Febrero BTS</option>
-               <option value="ChocoWow - PAN - NC - May-Jun-Jul">ChocoWow - PAN - NC - May-Jun-Jul</option>
-               <option value="Fevereiro 2022">Fevereiro 2022</option>
-               <option value="Filme Bad Guys">Filme Bad Guys</option>
-               <option value="General Motors - Campaña Anti bullying mayo">General Motors - Campaña Anti bullying mayo</option>
-               <option value="General Motors- Campaña antibullying abril cont CL">General Motors- Campaña antibullying abril cont CL</option>
-               <option value="Gobierno de Chile - CONASET Educación Vial Marzo CL ">Gobierno de Chile - CONASET Educación Vial Marzo CL </option>
-               <option value="Hasbro - Gaming Classics EXPO Mar 22">Hasbro - Gaming Classics EXPO Mar 22</option>
-               <option value="Hasbro - Snacking Grogu EM">Hasbro - Snacking Grogu EM</option>
-               <option value="Hotel Transilvânia 4 - Transformonstrão">Hotel Transilvânia 4 - Transformonstrão</option>
-               <option value="Jr. NBA _Agência Octagon_ABRIL de 2022">Jr. NBA _Agência Octagon_ABRIL de 2022</option>
-               <option value="Jr. NBA_Octagon_Março2022">Jr. NBA_Octagon_Março2022</option>
-               <option value="Jr.NBA_Octagon_Maio_2022">Jr.NBA_Octagon_Maio_2022</option>
-               <option value="Junho 2022">Junho 2022</option>
-               <option value="Lego Super Mario/ Friends">Lego Super Mario/ Friends</option>
-               <option value="Matific Nov 2021">Matific Nov 2021</option>
-               <option value="Mattel - Jurassic World Dominion">Mattel - Jurassic World Dominion</option>
-               <option value="Mc Donalds - Cajita Feliz - Walt Disney - Ene - Feb ">Mc Donalds - Cajita Feliz - Walt Disney - Ene - Feb </option>
-               <option value="Mc Donalds - Cajita Feliz Bob Esponja - CR">Mc Donalds - Cajita Feliz Bob Esponja - CR</option>
-               <option value="Mc Donalds - Cajita Feliz Bob Esponja - GT ">Mc Donalds - Cajita Feliz Bob Esponja - GT </option>
-               <option value="Mc Donalds - Cajita Feliz Bob Esponja Co">Mc Donalds - Cajita Feliz Bob Esponja Co</option>
-               <option value="Mc Donalds - Cajita Feliz Stitch - Mar/Abr - GT">Mc Donalds - Cajita Feliz Stitch - Mar/Abr - GT</option>
-               <option value="Mc Donalds - Cajita Feliz Stitch Mayo Co">Mc Donalds - Cajita Feliz Stitch Mayo Co</option>
-               <option value="MC DONALDS- CAJITA FELIZ SONIC ABR/MAY">MC DONALDS- CAJITA FELIZ SONIC ABR/MAY</option>
-               <option value="Minions 2 BR">Minions 2 BR</option>
-               <option value="MOTU kids">MOTU kids</option>
-               <option value="Nintendo - Brasil Brand Campaign FY22Q4">Nintendo - Brasil Brand Campaign FY22Q4</option>
-               <option value="Nintendo - Brasil Brand Campaign FY23Q1">Nintendo - Brasil Brand Campaign FY23Q1</option>
-               <option value="Nintendo - ELSA FY23Q1">Nintendo - ELSA FY23Q1</option>
-               <option value="Nintendo - Kirby and the Forgotten Land FY22Q4">Nintendo - Kirby and the Forgotten Land FY22Q4</option>
-               <option value="Nintendo - New Year Celebrity FY22Q4">Nintendo - New Year Celebrity FY22Q4</option>
-               <option value="Nintendo - Pokemon Legends FYQ422">Nintendo - Pokemon Legends FYQ422</option>
-               <option value="Nintendo - Switch Kids &amp; Parents FY23Q1">Nintendo - Switch Kids &amp; Parents FY23Q1</option>
-               <option value="Nintendo - Switch Sports FY23Q1">Nintendo - Switch Sports FY23Q1</option>
-               <option value="Nintendo Switch FY 22 Q4">Nintendo Switch FY 22 Q4</option>
-               <option value="Nosotras - Curvy ">Nosotras - Curvy </option>
-               <option value="Paramount + Paw Patrol Mayo">Paramount + Paw Patrol Mayo</option>
-               <option value="Paramount - Paws of fury trailer CL">Paramount - Paws of fury trailer CL</option>
-               <option value="Paramount - Sonic 2 AR">Paramount - Sonic 2 AR</option>
-               <option value="Paramount - Sonic 2 continuacion abril CL">Paramount - Sonic 2 continuacion abril CL</option>
-               <option value="Paramount - Sonic 2 trailer CL - Chile">Paramount - Sonic 2 trailer CL - Chile</option>
-               <option value="Paris Filmes_D.P.A 3_Agência Vibezz_Mar22">Paris Filmes_D.P.A 3_Agência Vibezz_Mar22</option>
-               <option value="PEDIASURE CAM FEB22">PEDIASURE CAM FEB22</option>
-               <option value="Petrizzio - Itzy - Chile">Petrizzio - Itzy - Chile</option>
-               <option value="Pollo Campero - always On - Junio">Pollo Campero - always On - Junio</option>
-               <option value="Pollo Campero Niños - Always On - Mayo ">Pollo Campero Niños - Always On - Mayo </option>
-               <option value="Serenito Minions UY 22">Serenito Minions UY 22</option>
-               <option value="SING 2">SING 2</option>
-               <option value="Solzinho 2022">Solzinho 2022</option>
-               <option value="Sonic 2 - Paramount">Sonic 2 - Paramount</option>
-               <option value="SONIC 2 La Película UIP ">SONIC 2 La Película UIP </option>
-               <option value="Subsecretaría de la niñez - Derecho de los niños">Subsecretaría de la niñez - Derecho de los niños</option>
-               <option value="Sunny - Harry potter Abril 2022">Sunny - Harry potter Abril 2022</option>
-               <option value="Sunny - Shimmer Me 202205">Sunny - Shimmer Me 202205</option>
-               <option value="Sunny - The Batman">Sunny - The Batman</option>
-               <option value="Sunny_TechDeck_202204">Sunny_TechDeck_202204</option>
-               <option value="UIP - Gato con botas 2 trailer AR">UIP - Gato con botas 2 trailer AR</option>
-               <option value="UIP - Gato con botas 2 trailer Vzla">UIP - Gato con botas 2 trailer Vzla</option>
-               <option value="UIP - Gatos con Botas trailer EC">UIP - Gatos con Botas trailer EC</option>
-               <option value="UIP - Jurassic World Dominion">UIP - Jurassic World Dominion</option>
-               <option value="UIP - Jurassic World Dominion Vzla">UIP - Jurassic World Dominion Vzla</option>
-               <option value="UIP - Lanzamiento Bad Guys - Feb/Mar">UIP - Lanzamiento Bad Guys - Feb/Mar</option>
-               <option value="UIP - Minions 2">UIP - Minions 2</option>
-               <option value="UIP - Minions 2 Trailer 4">UIP - Minions 2 Trailer 4</option>
-               <option value="UIP - Minions 2 Trailer Vzla">UIP - Minions 2 Trailer Vzla</option>
-               <option value="UIP - Sonic 2 PE continuación abril">UIP - Sonic 2 PE continuación abril</option>
-               <option value="UIP - The Bad Guys Caribe">UIP - The Bad Guys Caribe</option>
-               <option value="UIP - The bad guys PY">UIP - The bad guys PY</option>
-               <option value="UIP - The bad guys Trailer CL">UIP - The bad guys Trailer CL</option>
-               <option value="UIP - The Bad guys trailer feb 2022 BO">UIP - The Bad guys trailer feb 2022 BO</option>
-               <option value="UIP - The Bad guys Vzla ">UIP - The Bad guys Vzla </option>
-               <option value="UIP - Trailer Blazing Samurai - Abr">UIP - Trailer Blazing Samurai - Abr</option>
-               <option value="UIP - Trailer Minions CAM - Jun">UIP - Trailer Minions CAM - Jun</option>
-               <option value="UIP - Trailer Minions Junio ">UIP - Trailer Minions Junio </option>
-               <option value="UIP -SONIC 2 LANZAMIENTO MAR">UIP -SONIC 2 LANZAMIENTO MAR</option>
-               <option value="UIP BAD GUYS - CAM">UIP BAD GUYS - CAM</option>
-               <option value="UIP- Gato con botas trailer BO">UIP- Gato con botas trailer BO</option>
-               <option value="UIP- Minions 2 Trailer BO">UIP- Minions 2 Trailer BO</option>
-               <option value="UIP- Minions 2 trailer CL">UIP- Minions 2 trailer CL</option>
-               <option value="UIP- Minions 2 UY">UIP- Minions 2 UY</option>
-               <option value="UIP- The bad guys trailer AR">UIP- The bad guys trailer AR</option>
-               <option value="UIP-The puss in boots trailer CL">UIP-The puss in boots trailer CL</option>
-               <option value="Universal - Gabbys Dollhouse Cartoonito BR">Universal - Gabbys Dollhouse Cartoonito BR</option>
-               <option value="Universal Gabbys DollHouse - BR+ ROLA - Adicional 2022">Universal Gabbys DollHouse - BR+ ROLA - Adicional 2022</option>
-               <option value="Universal-Gabbys Dollhouse Cartoonito">Universal-Gabbys Dollhouse Cartoonito</option>
-               <option value="UNIVERSIDAD EL BOSQUE 2022">UNIVERSIDAD EL BOSQUE 2022</option>
-               <option value="Voligoma BTS 2022">Voligoma BTS 2022</option>
-               <option value="Walmart Verano - Disney - Abr">Walmart Verano - Disney - Abr</option>
-               <option value="Warner - Emilia">Warner - Emilia</option>
-               <option value="Warner Media: Animales Fantásticos 3">Warner Media: Animales Fantásticos 3</option>
-            </Form.Select>
-         </Form.Group>
-         </Col>
-         <Col lg={2} md={3}>
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Format</Form.Label>
-            <Form.Select aria-label="Default select example">
-               <option>Select</option>
-               <option selected="" value=""></option>
-               <option value="Branded Video (AA)">Branded Video (AA)</option>
-               <option value="Bumper Ads / URL YouTube (KSV)">Bumper Ads / URL YouTube (KSV)</option>
-               <option value="Interstitial / Carousel (AA)">Interstitial / Carousel (AA)</option>
-               <option value="Interstitial / Filmstrip (AA)">Interstitial / Filmstrip (AA)</option>
-               <option value="Interstitial / Minigame (AA)">Interstitial / Minigame (AA)</option>
-               <option value="Interstitial Tradicional (AA)">Interstitial Tradicional (AA)</option>
-               <option value="Pre Roll - In stream / URL YouTube (KSV)">Pre Roll - In stream / URL YouTube (KSV)</option>
-               <option value="Pre Roll 30¨ (AA / Programatic)">Pre Roll 30¨ (AA / Programatic)</option>
-            </Form.Select>
-         </Form.Group>
-         </Col>
-         <Col sm={12} md={12} lg={3}>
-         <div className="submit_btn">
-         <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label style={{ opacity:'0' }}>Reset</Form.Label> <br/>
-            <Button variant="outline-danger" >
-            Reset
-            </Button>
-         </Form.Group>
+   const handleApply = (event, picker) => {
+
+      picker.element.val(
+         picker.startDate.format('MM/DD/YYYY') +
+         ' - ' +
+         picker.endDate.format('MM/DD/YYYY')
+      );
+      setStartend({ start: picker.startDate.format('YYYY-MM-DD'), end: picker.endDate.format('YYYY-MM-DD') })
+      setrange(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))
+   };
+   const handleCancel = (event, picker) => {
+      picker.element.val('');
+   };
+
+   function refreshPage() {
+      window.location.reload();
+   }
+
+   let searchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`
+
+   useEffect(() => {
+      fetchReports();
+   }, []);
+   const getReports = async (e) => {
+      e.preventDefault();
+      fetchReports();
+   }
+
+   let fetchReports = async () => {
+      console.log(searchquery)
+      axios.get(
+         `${process.env.REACT_APP_BASE_URL}v1/reports?${searchquery}`, {
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+      }
+      ).then((response) => {
+         console.log("data--", response.data.data);
+         setReports(response.data.data);
+      });
+   }
+   const handleSelectChange = (event) => {
+      let value = event.target.value;
+      value == 'custom' ? setDateDisable(false) : setDateDisable(true);
+   }
+   const datechange = (events) =>{
+      let dimnesionValue = events.target.value;
+      dimnesionValue === "date" ? setShowResults(false) : setShowResults(true)
+   }
+   const findpercetage = (array, element) => {
+      let sum = array.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0);
+      let percentage = sum == 0 ? 0 : ((array.map(item => item[element]).reduce((prev, curr) => prev + curr, 0) / sum) * 100).toFixed(2);
+      return percentage
+   }
+   const usedimension = (newdimension) => {
+      searchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${newdimension}&filterDate=${filterDate}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`
+      fetchReports();
+      setDimension(newdimension)
+   }
+   const usedatefilter = (newdatefilter) => {
+      searchquery = `creation_date=${daterange}&startDate=${startend.start}&endDate=${startend.end}&campaign=${campaign}&format=${format}&period=${period}&advertiser=${advertiser}&dimension=${dimension}&filterDate=${newdatefilter}&impressions=${impressions ? impressions : ""}&views=${views ? views : ""}&clicks=${clicks ? clicks : ""}&engagements=${engagements ? engagements : ""}&cpcv=${cpcv ? cpcv : ""}&ctr=${ctr ? ctr : ""}&egRate=${egRate ? egRate : ""}`
+      fetchReports();
+      setFilterDate(newdatefilter)
+   }
+
+   const exportData = () => {
+      let date = new Date();
+                var html = document.querySelector("table").outerHTML;
+                export_table_to_csv(html, "report-" + date.getDate() + "." + (date.getMonth() + 1) + "." +
+                    date
+                    .getFullYear() + ".csv");
+           
+   }
+   const export_table_to_csv = (html, filename) => {
+      var csv = [];
+                var rows = document.querySelectorAll("table tr");
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [],
+                        cols = rows[i].querySelectorAll("td, th");
+                    for (var j = 0; j < cols.length; j++)
+                        row.push(cols[j].innerText);
+                    csv.push(row.join(","));
+                }
+                download_csv(csv.join("\n"), filename);
+   }
+
+   const download_csv = (csv, filename) =>{
+      var csvFile;
+                var downloadLink;
+                csvFile = new Blob([csv], {
+                    type: "text/csv"
+                });
+                downloadLink = document.createElement("a");
+                downloadLink.download = filename;
+                downloadLink.href = window.URL.createObjectURL(csvFile);
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+   }
+
+  
+   return (
+      <div className='content_outer'>
+         <div className='content'>
+
+            <div className='card_outer'>
+               <h2>Reports</h2>
+               <div className='reports_inner'>
+                  <Form onSubmit={getReports}>
+                     <Row >
+                        <Col  xl={2} lg={4} md={2}>
+                           <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>Period</Form.Label>
+                              <Form.Select aria-label="Default select example" onChange={(e) => { handleSelectChange(e); setPeriod(e.target.value) }} >
+                                 <option disabled={true} selected={true}>Select</option>
+                                 <option value="Yesterday">Yesterday</option>
+                                 <option value="month">So far this month</option>
+                                 <option value="seven_days">Last seven days</option>
+                                 <option value="last_month">Last month</option>
+                                 <option value="custom">Custom date</option>
+                              </Form.Select>
+                           </Form.Group>
+                        </Col>
+                        <Col md={3} lg={4} xl={2}>
+                           <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>Date Range</Form.Label>
+                              <DateRangePicker initialSettings={{
+                                 autoUpdateInput: false
+
+                              }}
+                                 onApply={handleApply}
+                                 onCancel={handleCancel}
+                                 disabled={true}
+                              >
+                                 <Form.Control type="text" placeholder="Creation Date" className="form-control" disabled={dateDisable} />
+                              </DateRangePicker>
+                           </Form.Group>
+                        </Col>
+                        <Col md={4} lg={4} xl={2}>
+                           <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>Campaign</Form.Label>
+                              <Form.Select aria-label="Default select example" onChange={e => { setCampaign(e.target.value) }}>
+                                 <option disabled={true} selected={true}>Select</option>
+                                 {reports?.campaign?.map((data, index) => (
+                                    <option value={data.campaign} key={index}> {data.campaign}</option>
+                                 ))}
+                              </Form.Select>
+                           </Form.Group>
+                        </Col>
+                        <Col xl={2} lg={4} md={3}>
+                           <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>Format</Form.Label>
+                              <Form.Select aria-label="Default select example" onChange={e => { setFormat(e.target.value) }}>
+                                 <option disabled={true} selected={true}>Select</option>
+                                 {reports?.formats?.map((data, index) => (
+                                    <option value={data.format} key={index}>{data.format}</option>
+                                 ))}
+                              </Form.Select>
+                           </Form.Group>
+                        </Col>
+                        <Col xl={2} lg={3} md={3}>
+                           <Form.Group className="mb-3" controlId="formBasicEmail">
+                              <Form.Label>Advertiser</Form.Label>
+                              <Form.Select aria-label="Default select example" onChange={e => { setAdvertiser(e.target.value) }}>
+                                 <option disabled={true} selected={true}>Select</option>
+                                 {reports?.advertiser?.map((data, index) => (
+                                    <option value={data.advertiser} key={index}>{data.advertiser}</option>
+                                 ))}
+                              </Form.Select>
+                           </Form.Group>
+                        </Col>
+                        <Col sm={12} md={3} lg={3} xl={2}>
+                           <div className='resetBtns'>
+                              <Form.Group className="mb-3" controlId="formBasicEmail">
+                                 <Form.Label style={{ opacity: '0' }} >Reset</Form.Label> <br />
+                                 <Button variant="outline-danger" onClick={refreshPage}>
+                                    Reset
+                                 </Button>
+                              </Form.Group>
+                           </div>
+                        </Col>
+                     </Row>
+
+                     <div className=''>
+                        <Row>
+                           <Col sm={4} className="border-right">
+                              <h2 className='mb-3'>Dimensions</h2>
+                              <Form.Group className="mb-3" controlId="formBasicEmail">
+                                 <Form.Select id='select' aria-label="Default select example" onChange={e => { datechange(e); usedimension(e.target.value) }}>
+                                    <option disabled={true} selected={true}>Select</option>
+                                    <option value="advertiser">Advertiser</option>
+                                    <option value="campaign">campaign</option>
+                                    <option value="format">Formats</option>
+                                    <option value="date" >Date</option>
+                                 </Form.Select>
+                              </Form.Group>
+                             
+                              <h2 className='mb-3'>Date</h2>
+                              <Form.Group className="mb-3" controlId="formBasicEmail">
+                                 <Form.Select disabled={showResults} aria-label="Default select example" onChange={e => { usedatefilter(e.target.value) }}>
+                                    <option disabled={true} selected={true} value="">Select</option>
+                                    <option value="byDay">By Date</option>
+                                    <option value="byMonth">By Month</option>
+                                 </Form.Select>
+                              </Form.Group>
+                           </Col>
+                           <Col sm={8}>
+                              <div className='metrics'>
+                                 <h2 className='text-center'>Metrics</h2>
+                                 <ul>
+                                    <li>
+                                       <Form.Check
+                                          label="Impressions"
+                                          name="impressions"
+                                          type="checkbox"
+                                          checked={impressions}
+                                          onChange={e => { setImpressions(e.target.checked); }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="Views"
+                                          name="views"
+                                          type="checkbox"
+                                          onChange={e => { setViews(e.target.checked) }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="Clicks"
+                                          name="clicks"
+                                          type="checkbox"
+                                          onChange={e => { setClicks(e.target.checked) }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="Engagements"
+                                          name="engagements"
+                                          type="checkbox"
+                                          onChange={e => { setEngagements(e.target.checked) }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="CPCV"
+                                          name="cpcv"
+                                          type="checkbox"
+                                          onChange={e => { setcpcv(e.target.checked) }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="CTR"
+                                          name="ctr"
+                                          type="checkbox"
+                                          onChange={e => { setctr(e.target.checked) }}
+                                       />
+                                    </li>
+                                    <li>
+                                       <Form.Check
+                                          reverse
+                                          label="Engage rate"
+                                          name="egRate"
+                                          type="checkbox"
+                                          onChange={e => { setegRate(e.target.checked) }}
+                                       />
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div>
+                              </div>
+                           </Col>
+                        </Row>
+                        <Button variant="success" type="submit" className=" d-block w-75 m-auto">Generate</Button>
+                     </div>
+
+                  </Form>
+
+
+
+
+               </div>
+            </div>
          </div>
-         </Col>
-      </Row>
 
-       <div className=''>
-       <Row>
-            <Col sm={4} className="border-right">
-            <h2 className='mb-3'>Dimensions</h2>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-               <Form.Select aria-label="Default select example">
-                  <option>Select</option>
-                  <option disabled="" selected="">Select</option>
-                  <option value="advertiser">Advertiser</option>
-                  <option value="campaign">campaign</option>
-                  <option value="format">Formats</option>
-                  <option value="date">Date</option>
-               </Form.Select>
-            </Form.Group>
-            <h2 className='mb-3'>Date</h2>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-               <Form.Select aria-label="Default select example">
-                  <option>Select</option>
-                  <option disabled="" selected="">By Date</option>
-                  <option value="advertiser">By Month</option>
-               </Form.Select>
-            </Form.Group>
-            </Col>
-            <Col sm={8}>
-            <div className='metrics'>
-                <h2 className='text-center'>Metrics</h2>
-               <ul>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="Impressions"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="Views"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="Clicks"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="Engagements"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="CPCV"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="CTR"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-                  <li>
-                     <Form.Check
-                        reverse
-                        label="Engage rate"
-                        name="group1"
-                        type="checkbox"
-                        />
-                  </li>
-               </ul>
+
+         
+         {(impressions == true || views == true || clicks == true || engagements == true || cpcv == true || ctr == true || egRate == true) &&
+            <div className='content'>
+
+               <div className='card'>
+              <div className="p-2 text-end">
+              <Button onClick={exportData} className="ms-auto w-20 mb-2 expo_button">Export</Button>
+              </div>
+
+                 
+
+                     <Table striped bordered hover>
+                        <thead>
+                           <tr>
+                              {dimension != "" &&
+                                 <th>{dimension}</th>
+                              }
+                              {filterDate != "" &&
+                                 <th>Date</th>
+                              }
+                              {impressions == true &&
+                                 <th>Impressions</th>
+                              }
+                              {views == true &&
+                                 <th>Views</th>
+                              }
+                              {clicks == true &&
+                                 <th>Clicks</th>
+                              }
+                              {engagements == true &&
+                                 <th>Engagements</th>
+                              }
+                              {cpcv == true &&
+                                 <th>CPCV</th>
+                              }
+                              {ctr == true &&
+                                 <th>CTR</th>
+                              }
+                              {egRate == true &&
+                                 <th>Engage Rate</th>
+                              }
+
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {(dimension != "" || filterDate != "") &&
+                              <>
+                                 {reports?.overview?.map((value, index) => {
+                                    return (
+                                       <tr>
+                                          {
+                                             dimension != "" &&
+                                             <td>{value[dimension]}</td>
+
+                                          }
+                                          {
+                                             filterDate != "" &&
+                                             <td>{value.date}</td>
+
+                                          }
+                                          {
+                                             impressions == true &&
+                                             <td>{value.impressions}</td>
+
+                                          }
+                                          {
+                                             views == true &&
+                                             <td>{value.views}</td>
+
+                                          }
+                                          {
+                                             clicks == true &&
+                                             <td>{value.clicks}</td>
+
+                                          }
+                                          {
+                                             engagements == true &&
+                                             <td>{value.engagements}</td>
+
+                                          }
+                                          {
+                                             cpcv == true &&
+                                             <>
+                                                {(() => {
+                                                   if (value.format == 'Branded Video (AA)' || value.format == 'Bumper Ads / URL YouTube (KSV)' || value.format == 'Pre Roll - In stream / URL YouTube (KSV)' || value.format == 'Pre Roll 30¨ (AA / Programatic)') {
+                                                      return (
+                                                         <td>{(value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.impressions) * 100).toFixed(2)}%</td>
+                                                      )
+                                                   } else {
+                                                      return (
+                                                         <td>N/A</td>
+                                                      )
+                                                   }
+
+                                                   return null;
+                                                })()}
+
+                                             </>
+                                          }
+                                          {
+                                             ctr == true &&
+
+                                             <>
+                                                {(() => {
+                                                   if (value.format != 'Virtual OOH - Estático' && value.format != 'Virtual OOH - GIF') {
+                                                      return (
+                                                         <td>{(value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.clicks / value.impressions) * 100).toFixed(2)}%</td>
+                                                      )
+                                                   } else {
+                                                      return (
+                                                         <td>N/A</td>
+                                                      )
+                                                   }
+
+                                                   return null;
+                                                })()}
+
+
+                                             </>
+                                          }
+                                          {
+                                             egRate == true &&
+
+                                             <>
+                                                {(() => {
+                                                   if (value.format == 'Interstitial Tradicional (AA)' || value.format == 'Interstitial / Carousel (AA)' || value.format == 'Interstitial / Filmstrip (AA)' || value.format == 'Interstitial / Minigame (AA)') {
+
+                                                      return (
+                                                         <td>{(value.impressions == null ? 0 : value.impressions) == 0 ? 0 : ((value.views / value.engagements) * 100).toFixed(2)}%</td>
+                                                      )
+                                                   } else {
+                                                      return (
+                                                         <td>N/A</td>
+                                                      )
+                                                   }
+
+                                                   return null;
+                                                })()}
+
+                                             </>
+                                          }
+                                       </tr>
+
+                                    )
+                                 })}
+                              </>
+
+                           }
+                           {(dimension == "" && filterDate == "") &&
+                              <>
+                              <tr>
+                                 {
+                                    impressions == true &&
+                                    <td>{reports?.overview?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)}</td>
+                                 }
+                                 {
+                                    views == true &&
+                                    <td>{reports?.overview?.map(item => item.views).reduce((prev, curr) => prev + curr, 0)}</td>
+
+                                 }
+                                 {
+                                    clicks == true &&
+                                    <td>{reports?.overview?.map(item => item.clicks).reduce((prev, curr) => prev + curr, 0)}</td>
+
+                                 }
+                                 {
+                                    engagements == true &&
+                                    <td>{reports?.overview?.map(item => item.engagements).reduce((prev, curr) => prev + curr, 0)}</td>
+
+                                 }
+                                 {
+                                    cpcv == true &&
+                                    <td>{reports?.cpcv?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.cpcv.map(item => item.views).reduce((prev, curr) => prev + curr, 0) / reports.cpcv.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2)}%</td>
+
+                                 }
+                                 {
+                                    ctr == true &&
+                                    <td>{reports?.ctr?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.ctr.map(item => item.clicks).reduce((prev, curr) => prev + curr, 0) / reports.ctr.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2)}%</td>
+
+                                 }
+                                 {
+                                    egRate == true &&
+                                    <td>{reports?.egRate?.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0) == 0 ? 0 : ((reports.egRate.map(item => item.engagements).reduce((prev, curr) => prev + curr, 0) / reports.egRate.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0)) * 100).toFixed(2)}%</td>
+
+                                 }
+                              </tr>
+                              </>
+                           }
+
+                        </tbody>
+                     </Table>
+
+               </div>
             </div>
-            <div>
-            </div>
-            </Col>
-         </Row>
-            <Button variant="success" className=" d-block w-75 m-auto">Generate</Button>
-       </div>
-     
-   </Form>
-   </div>
-   </div>
-   </div>
-</div>
-)
+         }
+
+      </div>
+
+   )
 }
 export default Reports
