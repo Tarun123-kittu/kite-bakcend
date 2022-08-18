@@ -20,6 +20,7 @@ import Adduser from './components/users/adduser';
 import Updateuser from './components/users/updateuser';
 import { VerifyAuth } from './middlewares/AuthVerify';
 import Abstract from './components/Abstract';
+import Calculater from './components/Abstract/calculater';
 function App() {
   return (
 
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/userlist" element={<VerifyAuth><Sidebar/><Header/><Userlist /></VerifyAuth>} />
         <Route exact path="/home" element={<><Sidebar/><Header/><Home/></>} />
         <Route exact path="/abstract" element={<><Sidebar/><Header/><Abstract/></>} />
+        <Route exact path="/calculater" element={<><Sidebar/><Header/><Calculater/></>} />
         <Route exact path="/reports" element={<VerifyAuth><Sidebar/><Header/><Reports /></VerifyAuth>} />
         <Route exact path="/profile" element={<VerifyAuth><Sidebar/><Header/><Profile /></VerifyAuth>} />
         <Route exact path="/changePassword" element={<VerifyAuth><Sidebar/><Header/><ChangePassword /></VerifyAuth>} />
