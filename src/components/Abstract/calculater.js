@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { reportSelector , clearState ,index } from '../../app/features/Report/reportSlice';
+import {useSelector , useDispatch} from 'react-redux';
 
 const percentage = 66;
 
 const Calculater = () => {
+    const dispatch = useDispatch();
+    const {countries,products,ageRanges ,isFetching ,isError ,isSuccess , error } = useSelector(
+        reportSelector
+    );
+
+    useEffect(() => {
+        dispatch(index({}))
+
+    }, [])
 
     return (
         <div><div className="content_outer abstract_wrapper">
