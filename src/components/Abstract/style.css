@@ -114,3 +114,15 @@ p.value {
     text-align: center;
     padding: 30px 0px;
 }
+.circle_bar {
+    height: 136px;
+}
+
+.circle_bar .CircularProgressbar .CircularProgressbar-text {
+    font-size: 6px;
+    fill: #000;
+}
+
+svg.CircularProgressbar {
+    height: 260px;
+}
