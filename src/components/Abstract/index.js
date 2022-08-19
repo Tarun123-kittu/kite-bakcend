@@ -36,6 +36,7 @@ const genders =[
                                         value={selected}
                                         onChange={setSelected}
                                         disableSearch={true}
+                                        hasSelectAll={false}
                                         labelledBy="Select"
                                     />
 
@@ -50,6 +51,7 @@ const genders =[
                                         value={gender}
                                         onChange={setGender}
                                         disableSearch={true}
+                                        hasSelectAll={false}
                                         labelledBy="Select"
                                     />
 
