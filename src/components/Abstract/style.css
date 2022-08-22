@@ -126,3 +126,23 @@ p.value {
 svg.CircularProgressbar {
     height: 260px;
 }
+.donald_header {
+    display: flex;
+    align-items: center;
+    background: rgb(65, 79, 177);
+    border-radius: 10px;
+    padding: 5px 1em;
+}
+
+.donald_header form {
+    display: flex;
+    margin-left: auto;
+}
+.donald_header h4 {
+    color: #fff;
+    margin: 0;
+}
+.donald_header button.btn.btn-outline-success {
+    border-color: #fff;
+    color: #fff;
+}

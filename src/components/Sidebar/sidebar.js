@@ -56,6 +56,9 @@ const handleclick = () =>{
         <li>
             <NavLink to="/calculater"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Calculater</span></NavLink >
         </li>
+        <li>
+            <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Variable</span></NavLink >
+        </li>
     </ul>
     
     </div>

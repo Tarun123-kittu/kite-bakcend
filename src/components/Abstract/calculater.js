@@ -1,24 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { reportSelector , clearState ,index } from '../../app/features/Report/reportSlice';
 import {useSelector , useDispatch} from 'react-redux';
+import axios from "axios";
 
-const percentage = 66;
+// const percentage = 66;
 
 const Calculater = () => {
+    const [country, setCountry] = useState("pe");
+    const [product, setProduct] = useState("1");
+    const [budget, setBudget] = useState("");
+    const [connectedPopulation, setConnectedPopulation] = useState("");
+    const [projectedPopulation, setProjectedPopulation] = useState("");
+    const [percentage, setPercentage] = useState("");
+    const [targetPopulation, setTargetPopulation] = useState(0);
     const dispatch = useDispatch();
     const {countries,products,ageRanges ,isFetching ,isError ,isSuccess , error } = useSelector(
         reportSelector
     );
-
+        console.log('tetsing',projectedPopulation.length)
     useEffect(() => {
-        dispatch(index({}))
+        dispatch(index({}));
+        fetchData();
 
     }, [])
+
+    let searchquery = `country=${country}&product=${product}&budget=${budget}`;
+    const handleCountry=(data)=>{
+        searchquery = `country=${data}&product=${product}&budget=${budget}`;
+        fetchData();
+        setCountry(data);
+     }
+     const handleProduct=(data)=>{
+        searchquery = `country=${country}&product=${data}&budget=${budget}`;
+        fetchData();
+        setProduct(data);
+     }
+
+     const handlebudget= async(e)=>{
+        e.preventDefault();
+        searchquery = `country=${country}&product=${product}&budget=${budget}`;
+        fetchData();
+     }
+
+    let fetchData = async (e) => {
+        
+        axios.get(
+           `${process.env.REACT_APP_BASE_URL}v1/reach?${searchquery}`, {
+              headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer ' + localStorage.getItem('token')
+              }
+        }
+        ).then((response) => {
+            console.log("response--",response.data.data[0])
+           setConnectedPopulation(response.data.data[0].connectedPopulation);
+           setProjectedPopulation(response.data.data[0].incidence);
+           setPercentage(Math.round(response.data.data[0].percentage));
+           setTargetPopulation(Number(response.data.data[0].target_population));
+            console.log("targetPopulation--",targetPopulation);
+           
+        });
+     }
 
     return (
         <div><div className="content_outer abstract_wrapper">
@@ -34,13 +82,10 @@ const Calculater = () => {
                                 Incidencia <img className="icon" src="assets/images/country.png" alt="" />
                             </h5>
                             <Form.Group className="mb-3 mt-3">
-                                <Form.Select >
-                                    <option> Argentina </option>
-                                    <option> Brasil </option>
-                                    <option> Chile </option>
-                                    <option> Colombia</option>
-                                    <option> México </option>
-                                    <option> Perú </option>
+                                <Form.Select onChange={e => { handleCountry(e.target.value)}} value={country}>
+                                {countries?.map((data, index) => (
+                                    <option value={data.ab} key={index}> {data.countryname}</option>
+                                 ))}
 
                                 </Form.Select>
                             </Form.Group>
@@ -52,10 +97,10 @@ const Calculater = () => {
                                 Producto <img className="icon" src="assets/images/production.png" alt="" />
                             </h5>
                             <Form.Group className="mb-3 mt-3">
-                                <Form.Select >
-                                    <option> Apps Kidscorp </option>
-                                    <option> Robolox </option>
-                                    <option> You tube </option>
+                                <Form.Select onChange={e => { handleProduct(e.target.value)}} value={product}>
+                                {products?.map((data, index) => (
+                                    <option value={data.productCode} key={index}> {data.description}</option>
+                                 ))}
 
                                 </Form.Select>
                             </Form.Group>
@@ -66,7 +111,8 @@ const Calculater = () => {
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
                             <h4>Poblacion Conectada</h4>
-                            <p className="value">5,054,402</p>
+                            {connectedPopulation.length <= 0 || connectedPopulation == null ? <p className="value">0</p> : <p className="value">{connectedPopulation}</p>}
+                      
                         </div>
                     </Col>
                     <Col lg={4}>
@@ -97,13 +143,23 @@ const Calculater = () => {
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
                             <h4>Poblacion Proyectada</h4>
-                            <p className="value">5,054,402</p>
+                            <p className="value">{Math.round(projectedPopulation)}</p>
                         </div>
                     </Col>
 
                     <Col lg={12}>
-                        <div className="graph_grid white_bg">
+                        <div className="graph_grid ">
+                            <div className="donald_header">
                             <h4>Poblacion Proyectada</h4>
+                            <Form onSubmit={handlebudget} >
+                                 <Form.Group className="me-2" controlId="formBasicEmail">
+                                     <Form.Control type="text" placeholder="Enter Budget" onChange={e => {setBudget(e.target.value)  }}/>
+                                 </Form.Group>
+                                <Button variant="outline-success" type="submit">
+                                  Submit
+                                </Button>
+                        </Form>
+                            </div>
                             <HighchartsReact highcharts={Highcharts} options={{
 
                                 chart: {
@@ -112,7 +168,7 @@ const Calculater = () => {
                                     plotShadow: false
                                 },
                                 title: {
-                                    text: 'Browser<br>shares<br>January<br>2022',
+                                    text: null,
                                     align: 'center',
                                     verticalAlign: 'middle',
                                     y: 60
@@ -140,17 +196,13 @@ const Calculater = () => {
                                 },
                                 series: [{
                                     type: 'pie',
-                                    name: 'Browser share',
+                                    name: 'To achieve',
                                     innerSize: '50%',
                                     data: [
-                                        ['Chrome', 73.86],
-                                        ['Edge', 11.97],
-                                        ['Firefox', 5.52],
-                                        ['Safari', 2.98],
-                                        ['Internet Explorer', 1.90],
+                                        ['Target Population', targetPopulation],
                                         {
                                             name: 'Other',
-                                            y: 3.77,
+                                            y: 100-targetPopulation,
                                             dataLabels: {
                                                 enabled: false
                                             }
