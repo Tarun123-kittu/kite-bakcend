@@ -1,25 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { MultiSelect } from "react-multi-select-component";
+import { useSelector, useDispatch } from 'react-redux';
 import './style.css';
+import {index, reportSelector} from '../../app/features/Report/reportSlice';
+import {fetchabstract, abstractSelector} from '../../app/features/Abstract/AbstractSlice';
+
 const Abstract = () => {
-    const countires = [
-        { label: "Argentina ", value: "Argentina" },
-        { label: "Brasil ", value: "Brasil" },
-        { label: "Chile ", value: "Chile" },
-        { label: "Colombia ", value: "Colombia" },
-        { label: "México ", value: "México" },
-        { label: "Perú ", value: "Perú" }
-    ];
+
+    const dispatch = useDispatch();
 const genders =[
-    { label: "Mujer ", value: "Mujer" },
-    { label: "Varon ", value: "Varon" }
+    { label: "Mujer ", value: "M" },
+    { label: "Varon ", value: "F" }
 ]
     const [selected, setSelected] = useState([]);
+    const [filteredCountries, setcountries]= useState([]);
+    const [filteredGender, setfilteredGender]= useState([]);
     const [gender, setGender] = useState([]);
+    const [ageRange, setageRange] = useState([]);
+    const {countries, ageRanges}=useSelector(reportSelector)
+    const {incidencia, poblacion_proyectada, population_projection_by_age, use_as_per_age}=useSelector(abstractSelector);
+    useEffect(()=>{
+        dispatch(index({}))
+        dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
+    }, [])
+
+    useEffect(()=>{
+        dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
+    }, [selected, gender])
+
+
+const handlecountrychange =(data)=>{
+    console.log(data)
+    let selectedcountry= data.map((i)=>{return i.value.toUpperCase()})
+    setSelected(data)
+    setcountries(selectedcountry)
+}
+
+const handleGanderchange=(data) =>{
+    console.log(data)
+    let selectedcountry= data.map((i)=>{return i.value.toUpperCase()})
+    setGender(data)
+    setfilteredGender(selectedcountry)
+}
+
+
     return (
         <>
             <div className="content_outer abstract_wrapper">
@@ -32,10 +60,11 @@ const genders =[
                                 <div>
                                   
                                     <MultiSelect
-                                        options={countires}
+                                        options={countries.map((i)=>({...i, label: i.countryname, value: i.ab}))}
                                         value={selected}
-                                        onChange={setSelected}
+                                        onChange={handlecountrychange}
                                         disableSearch={true}
+                                        hasSelectAll={false}
                                         labelledBy="Select"
                                     />
 
@@ -48,8 +77,9 @@ const genders =[
                                     <MultiSelect
                                         options={genders}
                                         value={gender}
-                                        onChange={setGender}
+                                        onChange={handleGanderchange}
                                         disableSearch={true}
+                                        hasSelectAll={false}
                                         labelledBy="Select"
                                     />
 
@@ -71,7 +101,7 @@ const genders =[
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                    75.80 %
+                                                    {incidencia?.YouTube ? (incidencia?.YouTube).toFixed(2):0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -81,7 +111,7 @@ const genders =[
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                    6,298,744
+                                                {poblacion_proyectada?.YouTube ? parseInt(poblacion_proyectada?.YouTube).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
@@ -102,7 +132,7 @@ const genders =[
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                    75.80 %
+                                                {incidencia?.Roblox ? (incidencia?.Roblox).toFixed(2) : 0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -112,7 +142,7 @@ const genders =[
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                    6,298,744
+                                                {poblacion_proyectada?.Roblox ? parseInt(poblacion_proyectada?.Roblox).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
@@ -133,7 +163,7 @@ const genders =[
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                    75.80 %
+                                                { incidencia?.AppsKidscorp ? (incidencia?.AppsKidscorp).toFixed(2): 0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -143,7 +173,7 @@ const genders =[
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                    6,298,744
+                                                {poblacion_proyectada?.AppsKidscorp ? parseInt(poblacion_proyectada?.AppsKidscorp).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
@@ -203,30 +233,7 @@ const genders =[
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: [
-                                                    {
-                                                        name: "4a6",
-                                                        y: 63.06,
-                                                        drilldown: "4a6"
-                                                    },
-                                                    {
-                                                        name: "7a9",
-                                                        y: 19.84,
-                                                        drilldown: "7a9"
-                                                    },
-                                                    {
-                                                        name: "10a12",
-                                                        y: 4.18,
-                                                        drilldown: "10a12"
-                                                    },
-                                                    {
-                                                        name: "13a18",
-                                                        y: 4.12,
-                                                        drilldown: "13a18"
-                                                    },
-
-
-                                                ]
+                                                data: (use_as_per_age?.YouTube) ? JSON.parse(use_as_per_age?.YouTube).map((i)=>({...i, y:parseFloat(i.y)})):{}
                                             }
                                         ],
 
@@ -251,7 +258,7 @@ const genders =[
                                         },
 
                                         xAxis: {
-                                            categories: ['4a6', '7a9', '10a12', '13a18',]
+                                            categories: ageRanges.map((i)=>{return i.description})
                                         },
 
                                         legend: {
@@ -271,7 +278,7 @@ const genders =[
 
                                         series: [{
                                             name: '',
-                                            data: [16.0, 18.2, 23.1, 27.9]
+                                            data: (population_projection_by_age?.YouTube) ? JSON.parse(population_projection_by_age?.YouTube).map((i)=>{return parseInt(i)}):[]
                                         }],
 
                                         responsive: {
@@ -341,30 +348,7 @@ const genders =[
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: [
-                                                    {
-                                                        name: "4a6",
-                                                        y: 63.06,
-                                                        drilldown: "4a6"
-                                                    },
-                                                    {
-                                                        name: "7a9",
-                                                        y: 19.84,
-                                                        drilldown: "7a9"
-                                                    },
-                                                    {
-                                                        name: "10a12",
-                                                        y: 4.18,
-                                                        drilldown: "10a12"
-                                                    },
-                                                    {
-                                                        name: "13a18",
-                                                        y: 4.12,
-                                                        drilldown: "13a18"
-                                                    },
-
-
-                                                ]
+                                                data: (use_as_per_age?.Roblox) ? JSON.parse(use_as_per_age?.Roblox).map((i)=>({...i, y:parseFloat(i.y)})):{}
                                             }
                                         ],
 
@@ -389,7 +373,7 @@ const genders =[
                                         },
 
                                         xAxis: {
-                                            categories: ['4a6', '7a9', '10a12', '13a18',]
+                                            categories: ageRanges.map((i)=>{return i.description})
                                         },
 
                                         legend: {
@@ -409,7 +393,7 @@ const genders =[
 
                                         series: [{
                                             name: '',
-                                            data: [16.0, 18.2, 23.1, 27.9]
+                                            data: (population_projection_by_age?.Roblox) ? JSON.parse(population_projection_by_age?.Roblox).map((i)=>{return parseInt(i)}):[]
                                         }],
 
                                         responsive: {
@@ -479,30 +463,7 @@ const genders =[
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: [
-                                                    {
-                                                        name: "4a6",
-                                                        y: 63.06,
-                                                        drilldown: "4a6"
-                                                    },
-                                                    {
-                                                        name: "7a9",
-                                                        y: 19.84,
-                                                        drilldown: "7a9"
-                                                    },
-                                                    {
-                                                        name: "10a12",
-                                                        y: 4.18,
-                                                        drilldown: "10a12"
-                                                    },
-                                                    {
-                                                        name: "13a18",
-                                                        y: 4.12,
-                                                        drilldown: "13a18"
-                                                    },
-
-
-                                                ]
+                                                data: (use_as_per_age?.AppsKidscorp) ? JSON.parse(use_as_per_age?.AppsKidscorp).map((i)=>({...i, y:parseFloat(i.y)})) : {}
                                             }
                                         ],
 
@@ -527,7 +488,7 @@ const genders =[
                                         },
 
                                         xAxis: {
-                                            categories: ['4a6', '7a9', '10a12', '13a18',]
+                                            categories: ageRanges.map((i)=>{return i.description})
                                         },
 
                                         legend: {
@@ -547,7 +508,7 @@ const genders =[
 
                                         series: [{
                                             name: '',
-                                            data: [16.0, 18.2, 23.1, 27.9]
+                                            data: (population_projection_by_age?.AppsKidscorp) ? JSON.parse(population_projection_by_age?.AppsKidscorp).map((i)=>{return parseInt(i)}):[]
                                         }],
 
                                         responsive: {
