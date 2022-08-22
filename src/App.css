@@ -172,11 +172,5 @@ body.body_toggle .content_outer {
 
 /* media query starts here */
 @media(max-width:991px){
-  .content_outer {
-    margin-left: 210px;
-}
-.content {
-  padding: 1em;
-  width: 100%;
-}
+ 
 }

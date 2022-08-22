@@ -10,6 +10,7 @@
 }
 .bg_white {
     background-size: cover;
+    background-position: right;
 }
 .bg_white.youtube {
     background-image: url('../../assets/images/youtubebg.png');
@@ -39,6 +40,18 @@
     border-radius: 10px;
     text-align: center;
     background: rgb(255 255 255 / 61%);
+    min-height: 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.social_inner_grid h2 {
+    font-size: 18px;
+}
+.social_inner_grid h5{
+    font-size: 16px;
 }
 .content_outer.abstract_wrapper {
     background: #f5fbff;
@@ -145,4 +158,52 @@ svg.CircularProgressbar {
 .donald_header button.btn.btn-outline-success {
     border-color: #fff;
     color: #fff;
+}
+.header_multiselects {
+    display: flex;
+    margin-left: auto;
+}
+/* media query starts here */
+@media(max-width:1440px){
+    .social_grid, .graph_grid {
+        padding: 6px;
+    }
+    .content {
+        padding: 1.3em;
+    }
+}
+
+@media(max-width:1199px){
+    .social_inner_grid {
+        margin-bottom: 20px;
+    }
+    .social_image img {
+        width: 100%;
+    }
+}
+@media(max-width:991px){
+    .social_image img {
+        width: 50%;
+    }
+    .calculaterHeader h6 {
+        margin: 10px;
+        width: 100%;
+    }
+    .calculaterHeader {
+        flex-wrap: wrap;
+       
+    }
+    .header_multiselects {
+        margin: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .calculaterHeader .rmsc.multi-select {
+        min-width: auto;
+        width: 100%;
+    }
+    .header_multiselects>div {
+        width: 100%;
+    }
+  
 }

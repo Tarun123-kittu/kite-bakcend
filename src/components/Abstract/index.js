@@ -54,10 +54,10 @@ const handleGanderchange=(data) =>{
                 <div className="content">
                     <div className="calculaterHeader">
                         <h6>Resumen</h6>
-                        <div className="d-flex ms-auto">
+                        <div className="header_multiselects">
                             <div className="d-flex align-items-center">
                                 <img src="assets/images/country.png" alt="" />
-                                <div>
+                               
                                   
                                     <MultiSelect
                                         options={countries.map((i)=>({...i, label: i.countryname, value: i.ab}))}
@@ -68,12 +68,11 @@ const handleGanderchange=(data) =>{
                                         labelledBy="Select"
                                     />
 
-                                </div>
+                                
                             </div>
                             <div className="d-flex align-items-center">
                             <img src="assets/images/gender.png" alt="" />
-                                <div>
-                                  
+                                
                                     <MultiSelect
                                         options={genders}
                                         value={gender}
@@ -83,7 +82,7 @@ const handleGanderchange=(data) =>{
                                         labelledBy="Select"
                                     />
 
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -95,7 +94,7 @@ const handleGanderchange=(data) =>{
                                         <img src="assets/images/youtube.png" alt="youtube" />
                                     </div>
                                     <Row>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Incidencia
@@ -105,7 +104,7 @@ const handleGanderchange=(data) =>{
                                                 </h2>
                                             </div>
                                         </Col>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Poblacion Proyectada
@@ -126,7 +125,7 @@ const handleGanderchange=(data) =>{
                                         <img src="assets/images/robolox.png" alt="youtube" />
                                     </div>
                                     <Row>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Incidencia
@@ -136,7 +135,7 @@ const handleGanderchange=(data) =>{
                                                 </h2>
                                             </div>
                                         </Col>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Poblacion Proyectada
@@ -157,7 +156,7 @@ const handleGanderchange=(data) =>{
                                         <img src="assets/images/kidscorp.png" alt="youtube" />
                                     </div>
                                     <Row>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Incidencia
@@ -167,7 +166,7 @@ const handleGanderchange=(data) =>{
                                                 </h2>
                                             </div>
                                         </Col>
-                                        <Col lg={6}>
+                                        <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
                                                     Poblacion Proyectada

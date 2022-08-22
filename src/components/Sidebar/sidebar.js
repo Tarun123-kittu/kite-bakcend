@@ -9,6 +9,7 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { authSelector ,  } from '../../app/features/Auth/authSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faFont } from '@fortawesome/free-solid-svg-icons'
 import {useSelector , useDispatch} from 'react-redux';
 const Sidebar = () => {
   const {toggleActive} = useSelector(
@@ -57,7 +58,7 @@ const handleclick = () =>{
             <NavLink to="/calculater"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Calculater</span></NavLink >
         </li>
         <li>
-            <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Variable</span></NavLink >
+            <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faFont} /></div><span className='ml-2'>Variable</span></NavLink >
         </li>
     </ul>
     
