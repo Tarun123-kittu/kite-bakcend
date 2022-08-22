@@ -101,7 +101,7 @@ const handleGanderchange=(data) =>{
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                    {(incidencia?.YouTube).toFixed(2)}%
+                                                    {incidencia?.YouTube ? (incidencia?.YouTube).toFixed(2):0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -111,7 +111,7 @@ const handleGanderchange=(data) =>{
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                {parseInt(poblacion_proyectada?.YouTube).toLocaleString('en-US')}
+                                                {poblacion_proyectada?.YouTube ? parseInt(poblacion_proyectada?.YouTube).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
@@ -132,7 +132,7 @@ const handleGanderchange=(data) =>{
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                {(incidencia?.Roblox).toFixed(2)}%
+                                                {incidencia?.Roblox ? (incidencia?.Roblox).toFixed(2) : 0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -142,7 +142,7 @@ const handleGanderchange=(data) =>{
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                {parseInt(poblacion_proyectada?.Roblox).toLocaleString('en-US')}
+                                                {poblacion_proyectada?.Roblox ? parseInt(poblacion_proyectada?.Roblox).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
@@ -163,7 +163,7 @@ const handleGanderchange=(data) =>{
                                                     Incidencia
                                                 </h5>
                                                 <h2>
-                                                {(incidencia?.AppsKidscorp).toFixed(2)}%
+                                                { incidencia?.AppsKidscorp ? (incidencia?.AppsKidscorp).toFixed(2): 0}%
                                                 </h2>
                                             </div>
                                         </Col>
@@ -173,7 +173,7 @@ const handleGanderchange=(data) =>{
                                                     Poblacion Proyectada
                                                 </h5>
                                                 <h2>
-                                                {parseInt(poblacion_proyectada?.AppsKidscorp).toLocaleString('en-US')}
+                                                {poblacion_proyectada?.AppsKidscorp ? parseInt(poblacion_proyectada?.AppsKidscorp).toLocaleString('en-US'):0}
                                                 </h2>
                                             </div>
                                         </Col>
