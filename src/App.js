@@ -19,7 +19,9 @@ import Userlist from './components/users/userlist';
 import Adduser from './components/users/adduser';
 import Updateuser from './components/users/updateuser';
 import { VerifyAuth } from './middlewares/AuthVerify';
-
+import Abstract from './components/Abstract';
+import Calculater from './components/Abstract/calculater';
+import Variable from './components/Variable';
 function App() {
   return (
 
@@ -30,7 +32,10 @@ function App() {
         <Route exact path="/forgot" element={<Forgot />} />
         <Route exact path="/userlist" element={<VerifyAuth><Sidebar/><Header/><Userlist /></VerifyAuth>} />
         <Route exact path="/home" element={<VerifyAuth><Sidebar/><Header/><Home/></VerifyAuth>} />
+        <Route exact path="/abstract" element={<VerifyAuth><Sidebar/><Header/><Abstract/></VerifyAuth>} />
+        <Route exact path="/calculater" element={<VerifyAuth><Sidebar/><Header/><Calculater/></VerifyAuth>} />
         <Route exact path="/reports" element={<VerifyAuth><Sidebar/><Header/><Reports /></VerifyAuth>} />
+        <Route exact path="/variable" element={<VerifyAuth><Sidebar/><Header/><Variable /></VerifyAuth>} />
         <Route exact path="/profile" element={<VerifyAuth><Sidebar/><Header/><Profile /></VerifyAuth>} />
         <Route exact path="/changePassword" element={<VerifyAuth><Sidebar/><Header/><ChangePassword /></VerifyAuth>} />
         <Route exact path="/addUser" element={<VerifyAuth><Sidebar/><Header/><Adduser /></VerifyAuth>} />

@@ -98,7 +98,29 @@ display: none;
 /* media query starts here */
 @media(max-width:991px){
     .sidebar_outer {
+        width: 60px;
+    }
+    .content_outer {
+        margin-left: 66px;
+    }
+    span.logo_icon {
+        display: none;
+    }
+    
+    span.logo_text {
+        display: none;
+    }
+    .sidebar_outer.toggle {
         width: 210px;
- 
+    }
+    .sidebar_outer.toggle span.logo_icon {
+        display: none;
+    }
+    
+    .sidebar_outer.toggle span.logo_text {
+        display: none;
+    }
+    body.body_toggle .content_outer {
+        margin-left: 220px;
     }
 }

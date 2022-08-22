@@ -4,9 +4,12 @@ import {NavLink} from 'react-router-dom'
 import { faLaptop } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
+import { faClone } from '@fortawesome/free-solid-svg-icons'
+import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { authSelector ,  } from '../../app/features/Auth/authSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faFont } from '@fortawesome/free-solid-svg-icons'
 import {useSelector , useDispatch} from 'react-redux';
 const Sidebar = () => {
   const {toggleActive} = useSelector(
@@ -47,6 +50,15 @@ const handleclick = () =>{
         </li>
         <li>
             <NavLink to="/reports"><div className='nav_icon'><FontAwesomeIcon icon={faFile} /></div><span className='ml-2'>Reports</span></NavLink >
+        </li>
+        <li>
+            <NavLink to="/abstract"><div className='nav_icon'><FontAwesomeIcon icon={faClone} /></div><span className='ml-2'>Abstract</span></NavLink >
+        </li>
+        <li>
+            <NavLink to="/calculater"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Calculater</span></NavLink >
+        </li>
+        <li>
+            <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faFont} /></div><span className='ml-2'>Variable</span></NavLink >
         </li>
     </ul>
     

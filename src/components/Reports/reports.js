@@ -67,13 +67,16 @@ const Reports = () => {
       axios.get(
          `${process.env.REACT_APP_BASE_URL}v1/reports?${searchquery}`, {
             headers: {
-               'Content-Type': 'application/json',
+               "Accept":"application/json, text/plain, /",
+               "Content-Type": "multipart/form-data",
                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
       }
       ).then((response) => {
          console.log("data--", response.data.data);
          setReports(response.data.data);
+      }).catch((error)=>{
+         console.log("ERRROR", error);
       });
    }
    const handleSelectChange = (event) => {

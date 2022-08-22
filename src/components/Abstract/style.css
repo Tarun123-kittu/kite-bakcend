@@ -1,0 +1,209 @@
+.social_grid.youtube{
+  
+}
+.social_grid,
+.graph_grid {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.bg_white {
+    background-size: cover;
+    background-position: right;
+}
+.bg_white.youtube {
+    background-image: url('../../assets/images/youtubebg.png');
+    padding: 10px;
+}
+.bg_white.robolox {
+    background-image: url('../../assets/images/roboloxbg.png');
+    padding: 10px;
+}
+.bg_white.kidscorp {
+    background-image: url('../../assets/images/kidscorpbg.png');
+    padding: 10px;
+}
+.social_image img {
+    width: 50%;
+    margin: auto;
+    height: 50px;
+}
+
+.social_image {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.social_inner_grid {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    background: rgb(255 255 255 / 61%);
+    min-height: 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.social_inner_grid h2 {
+    font-size: 18px;
+}
+.social_inner_grid h5{
+    font-size: 16px;
+}
+.content_outer.abstract_wrapper {
+    background: #f5fbff;
+}
+
+.calculaterHeader {
+    display: flex;
+    background:  rgb(65, 79, 177);
+    border-radius: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calculaterHeader h6 {
+    color: #fff;
+    background-color: #0e1a77;
+    margin: 0;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+.calculaterHeader img {
+    width: 33px;
+}
+.calculaterHeader .rmsc.multi-select {
+    min-width: 230px;
+    margin: 0px 8px;
+}
+.graph_grid img {
+    width: 33px;
+}
+.white_bg{
+    background-color: #fff;
+}
+.calculaterHeader {
+    display: flex;
+    background:  rgb(65, 79, 177);
+    border-radius: 10px;
+}
+
+.calculaterHeader h6 {
+    color: #fff;
+    background-color: #0e1a77;
+    margin: 0;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.calculaterHeader img {
+    width: 33px;
+}
+
+.calculaterHeader .rmsc.multi-select {
+    min-width: 230px;
+    margin: 0px 8px;
+}
+
+.social_grid img.icon {
+    width: 33px;
+}
+
+.graph_grid.white_bg h4 {
+    background-color: rgb(249, 120, 200);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+
+
+p.value {
+    font-size: 40px;
+    text-align: center;
+    padding: 30px 0px;
+}
+.circle_bar {
+    height: 136px;
+}
+
+.circle_bar .CircularProgressbar .CircularProgressbar-text {
+    font-size: 6px;
+    fill: #000;
+}
+
+svg.CircularProgressbar {
+    height: 260px;
+}
+.donald_header {
+    display: flex;
+    align-items: center;
+    background: rgb(65, 79, 177);
+    border-radius: 10px;
+    padding: 5px 1em;
+}
+
+.donald_header form {
+    display: flex;
+    margin-left: auto;
+}
+.donald_header h4 {
+    color: #fff;
+    margin: 0;
+}
+.donald_header button.btn.btn-outline-success {
+    border-color: #fff;
+    color: #fff;
+}
+.header_multiselects {
+    display: flex;
+    margin-left: auto;
+}
+/* media query starts here */
+@media(max-width:1440px){
+    .social_grid, .graph_grid {
+        padding: 6px;
+    }
+    .content {
+        padding: 1.3em;
+    }
+}
+
+@media(max-width:1199px){
+    .social_inner_grid {
+        margin-bottom: 20px;
+    }
+    .social_image img {
+        width: 100%;
+    }
+}
+@media(max-width:991px){
+    .social_image img {
+        width: 50%;
+    }
+    .calculaterHeader h6 {
+        margin: 10px;
+        width: 100%;
+    }
+    .calculaterHeader {
+        flex-wrap: wrap;
+       
+    }
+    .header_multiselects {
+        margin: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .calculaterHeader .rmsc.multi-select {
+        min-width: auto;
+        width: 100%;
+    }
+    .header_multiselects>div {
+        width: 100%;
+    }
+  
+}
