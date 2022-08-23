@@ -86,7 +86,7 @@ const Home = () => {
             type: 'spline'
          },
          title: {
-            text: 'views and impressions'
+            text: 'Views and Impressions'
          },
          xAxis: {
             categories: date

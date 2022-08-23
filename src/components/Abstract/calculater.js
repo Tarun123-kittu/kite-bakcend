@@ -23,7 +23,6 @@ const Calculater = () => {
     const {countries,products,ageRanges ,isFetching ,isError ,isSuccess , error } = useSelector(
         reportSelector
     );
-        console.log('tetsing',projectedPopulation.length)
     useEffect(() => {
         dispatch(index({}));
         fetchData();
@@ -111,7 +110,7 @@ const Calculater = () => {
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
                             <h4>Poblacion Conectada</h4>
-                            {connectedPopulation.length <= 0 || connectedPopulation == null ? <p className="value">0</p> : <p className="value">{connectedPopulation}</p>}
+                            {connectedPopulation <= 0 || connectedPopulation == null ? <p className="value">0</p> : <p className="value">{connectedPopulation}</p>}
                       
                         </div>
                     </Col>

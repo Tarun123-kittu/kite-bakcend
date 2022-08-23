@@ -25,7 +25,7 @@ import {useSelector , useDispatch} from 'react-redux';
         if(isSuccess){
             dispatch(clearState());
 
-            toast.success("loggedIn");
+            toast.success("Logged In");
             navigation("/home");
 
         }

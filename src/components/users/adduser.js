@@ -27,7 +27,9 @@ const Adduser = () => {
           'Authorization': 'Bearer '+localStorage.getItem('token')
         }}
       ).then((response) => {
-          setDeals(response.data.data);
+        console.log(response.data.data)
+       let dataids= response.data.data.map((i)=>({...i, label: ("" +  i.deal_id).toString(), value: ("" +  i.deal_id).toString() }))
+         setDeals(dataids);
       });
     }, []);
 
@@ -193,6 +195,7 @@ const Adduser = () => {
         value={selected}
         onChange={(values)=>{selectValue(values)}}
         labelledBy="Select"
+        disableSearch={true}
       />
    
     </Form.Group>
