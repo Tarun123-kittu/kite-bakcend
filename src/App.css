@@ -92,7 +92,7 @@ a{
 
 .form-select, .form-control, .content_outer button {
   font-size: .8rem;
-  line-height: 1;
+  line-height: 1rem;
   height: 30px;
   font-weight: 500;
 }

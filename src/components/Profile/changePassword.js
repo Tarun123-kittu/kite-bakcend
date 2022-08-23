@@ -17,17 +17,17 @@ const ChangePassword = () => {
 
     e.preventDefault();
     try {
-      if(password == ""){
+      if(password.trim() == ""){
         toast.error("Password field is required");
         return false;
       }
 
-      if(new_password == ""){
+      if(new_password.trim() == ""){
         toast.error("New Password field is required");
         return false;
       }
 
-      if(new_password_confirmation == ""){
+      if(new_password_confirmation.trim() == ""){
         toast.error("Confirm Password field is required");
         return false;
       }    

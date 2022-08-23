@@ -45,28 +45,28 @@ const Adduser = () => {
    
         e.preventDefault();
         try {
-          if(first_name == ""){
+          if(first_name.trim() == ""){
             toast.error("First Name field is required");
             return false;
           }
 
-          if(last_name == ""){
+          if(last_name.trim() == ""){
             toast.error("Last Name field is required");
             return false;
           }
-            if(email == ""){
+            if(email.trim() == ""){
                 toast.error("Email field is required");
                 return false;
             }
-            if(company == ""){
+            if(company.trim() == ""){
               toast.error("Company field is required");
               return false;
             }
-            if(type == ""){
+            if(type.trim() == ""){
               toast.error("Type field is required");
               return false;
             }
-            if(password == ""){
+            if(password.trim() == ""){
                 toast.error("Password field is required");
                 return false;
             }

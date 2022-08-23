@@ -74,24 +74,24 @@ const Updateuser = () => {
 
      e.preventDefault();
      try {
-       if(first_name == ""){
+       if(first_name.trim() == ""){
          toast.error("First Name field is required");
          return false;
        }
 
-       if(last_name == ""){
+       if(last_name.trim() == ""){
          toast.error("Last Name field is required");
          return false;
        }
-         if(userEmail == ""){
+         if(userEmail.trim() == ""){
              toast.error("Email field is required");
              return false;
          }
-         if(company == ""){
+         if(company.trim() == ""){
            toast.error("Company field is required");
            return false;
          }
-         if(type == ""){
+         if(type.trim() == ""){
            toast.error("Type field is required");
            return false;
          }
