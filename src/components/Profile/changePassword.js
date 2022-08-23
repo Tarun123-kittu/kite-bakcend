@@ -18,17 +18,17 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       if(password.trim() == ""){
-        toast.error("Password field is required");
+        toast.error("Password field is required / Spaces are not allowed");
         return false;
       }
 
       if(new_password.trim() == ""){
-        toast.error("New Password field is required");
+        toast.error("New Password field is required / Spaces are not allowed");
         return false;
       }
 
       if(new_password_confirmation.trim() == ""){
-        toast.error("Confirm Password field is required");
+        toast.error("Confirm Password field is required / Spaces are not allowed");
         return false;
       }    
         
