@@ -67,7 +67,7 @@ const Adduser = () => {
               return false;
             }
             if(password.trim() == ""){
-                toast.error("Password field is required");
+                toast.error("Password field is required / Spaces are not allowed");
                 return false;
             }
             if(selectedids.length === 0){
