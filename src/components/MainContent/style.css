@@ -17,6 +17,12 @@
 table.table {
     border: 1px solid #ddd;
 }
+.high_chart div {
+    height: 220px;
+}
+.pie_chart>div {
+    height: 390px;
+}
 /* media query starts here */
 @media(max-width:991px){
     .submit_btn label, .submit_btn br {

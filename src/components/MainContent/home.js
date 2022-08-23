@@ -246,16 +246,18 @@ const Home = () => {
                   <Col lg={9} md={12}>
                      <div className="card_outer statistics">
                         <h2>Statistics</h2>
-                        <HighchartsReact
+                     <div className="high_chart">
+                     <HighchartsReact
                            highcharts={Highcharts}
                            options={linegraph}
                         />
+                     </div>
                      </div>
                   </Col>
                </Row>
 
                <Row>
-                  <Col lg={8} md={12}>
+                  <Col lg={6} md={12}>
                      <div className="card_outer statistics p-0">
                         <h2 className='p-4'>Formats</h2>
                         <div className='format'>
@@ -289,16 +291,31 @@ const Home = () => {
 
                      </div>
                   </Col>
-                  <Col lg={4} md={12}>
+                  <Col lg={6} md={12}>
                      <div className="card_outer">
-                        <HighchartsReact highcharts={Highcharts} options={
+                       <div className="pie_chart">
+                       <HighchartsReact highcharts={Highcharts} options={
                            {
                               chart: {
                                  plotBackgroundColor: null,
                                  plotBorderWidth: null,
                                  plotShadow: false,
-                                 type: 'pie'
+                                 type: 'pie',
+                                 margin: [25, 20, 20, 20],
+                                 spacingTop: 0,
+                                 spacingBottom: 0,
+                                 spacingLeft: 0,
+                                 spacingRight: 0
                               },
+                           
+                             plotOptions: {
+                                 pie: {
+                                     size:'100%',
+                                     dataLabels: {
+                                         enabled: false
+                                     }
+                                 }
+                             },
                               title: {
                                  text: 'Device Usage World wide'
                               },
@@ -329,6 +346,7 @@ const Home = () => {
                                  data: device
                               }]
                            }} />
+                       </div>
                      </div>
                   </Col>
                </Row>

@@ -92,7 +92,10 @@ const Reports = () => {
    }
    const datechange = (events) =>{
       let dimnesionValue = events.target.value;
-      dimnesionValue === "date" ? setShowResults(false) : setShowResults(true)
+      dimnesionValue === "date" ? setShowResults(true) : setShowResults(false)
+      if(dimnesionValue === "date"){
+         setFilterDate("")
+      }
    }
    const findpercetage = (array, element) => {
       let sum = array.map(item => item.impressions).reduce((prev, curr) => prev + curr, 0);
