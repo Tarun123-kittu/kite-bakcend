@@ -136,7 +136,7 @@ const Calculater = () => {
                     <Col lg={6}>
                         <div className="graph_grid white_bg">
                             <h5>
-                                Incidence <img className="icon" src="assets/images/country.png" alt="" />
+                                Country <img className="icon" src="assets/images/country.png" alt="" />
                             </h5>
                             <Form.Group className="mb-3 mt-3">
                                 <Form.Select onChange={e => { handleCountry(e.target.value)}} value={country}>
