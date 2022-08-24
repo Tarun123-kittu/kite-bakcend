@@ -13,8 +13,8 @@ const Abstract = () => {
 
     const dispatch = useDispatch();
 const genders =[
-    { label: "Mujer ", value: "M" },
-    { label: "Varon ", value: "F" }
+    { label: "Woman ", value: "M" },
+    { label: "Male ", value: "F" }
 ]
     const [selected, setSelected] = useState([]);
     const [filteredCountries, setcountries]= useState([]);
@@ -23,12 +23,14 @@ const genders =[
     const [ageRange, setageRange] = useState([]);
     const {countries, ageRanges}=useSelector(reportSelector)
     const {incidencia, poblacion_proyectada, population_projection_by_age, use_as_per_age}=useSelector(abstractSelector);
-    useEffect(()=>{
-        dispatch(index({}))
-        dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
-    }, [])
+    // useEffect(()=>{
+    //     dispatch(index({}))
+    //     dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
+    // }, [])
 
     useEffect(()=>{
+        console.log(selected,"//", gender)
+        dispatch(index({}))
         dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
     }, [selected, gender])
 
@@ -53,7 +55,7 @@ const handleGanderchange=(data) =>{
             <div className="content_outer abstract_wrapper">
                 <div className="content">
                     <div className="calculaterHeader">
-                        <h6>Resumen</h6>
+                        <h6>Abstract</h6>
                         <div className="header_multiselects">
                             <div className="d-flex align-items-center">
                                 <img src="assets/images/country.png" alt="" />
@@ -97,7 +99,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Incidencia
+                                                    Incidence
                                                 </h5>
                                                 <h2>
                                                     {incidencia?.YouTube ? (incidencia?.YouTube).toFixed(2):0}%
@@ -107,7 +109,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Poblacion Proyectada
+                                                Projected Population
                                                 </h5>
                                                 <h2>
                                                 {poblacion_proyectada?.YouTube ? parseInt(poblacion_proyectada?.YouTube).toLocaleString('en-US'):0}
@@ -128,7 +130,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Incidencia
+                                                Incidence
                                                 </h5>
                                                 <h2>
                                                 {incidencia?.Roblox ? (incidencia?.Roblox).toFixed(2) : 0}%
@@ -138,7 +140,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Poblacion Proyectada
+                                                Projected Population
                                                 </h5>
                                                 <h2>
                                                 {poblacion_proyectada?.Roblox ? parseInt(poblacion_proyectada?.Roblox).toLocaleString('en-US'):0}
@@ -159,7 +161,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Incidencia
+                                                Incidence
                                                 </h5>
                                                 <h2>
                                                 { incidencia?.AppsKidscorp ? (incidencia?.AppsKidscorp).toFixed(2): 0}%
@@ -169,7 +171,7 @@ const handleGanderchange=(data) =>{
                                         <Col xxl={6} xl={6} lg={12}>
                                             <div className="social_inner_grid">
                                                 <h5>
-                                                    Poblacion Proyectada
+                                                Projected Population
                                                 </h5>
                                                 <h2>
                                                 {poblacion_proyectada?.AppsKidscorp ? parseInt(poblacion_proyectada?.AppsKidscorp).toLocaleString('en-US'):0}
@@ -194,7 +196,7 @@ const handleGanderchange=(data) =>{
                                         },
                                         title: {
                                             align: 'center',
-                                            text: '% Uso de Youtube por Edad'
+                                            text: '% Use of youtube by age'
                                         },
 
                                         accessibility: {
@@ -245,7 +247,7 @@ const handleGanderchange=(data) =>{
                                 <div className="graph">
                                     <HighchartsReact highcharts={Highcharts} options={{
                                         title: {
-                                            text: 'Poblacion Proyectada de Youtube por Edad'
+                                            text: 'Youtube projected population by age'
                                         },
 
 
@@ -309,7 +311,7 @@ const handleGanderchange=(data) =>{
                                         },
                                         title: {
                                             align: 'center',
-                                            text: '% Uso de Roblox por Edad'
+                                            text: '% Use of Roblox by age'
                                         },
 
                                         accessibility: {
@@ -360,7 +362,7 @@ const handleGanderchange=(data) =>{
                                 <div className="graph">
                                     <HighchartsReact highcharts={Highcharts} options={{
                                         title: {
-                                            text: 'Poblacion Proyectada de Roblox por Edad'
+                                            text: 'Roblox projected population by age'
                                         },
 
 
@@ -424,7 +426,7 @@ const handleGanderchange=(data) =>{
                                         },
                                         title: {
                                             align: 'center',
-                                            text: '% Uso de Kidscorp Apps por Edad'
+                                            text: '% use of Kidscorp by age'
                                         },
 
                                         accessibility: {
@@ -475,7 +477,7 @@ const handleGanderchange=(data) =>{
                                 <div className="graph">
                                     <HighchartsReact highcharts={Highcharts} options={{
                                         title: {
-                                            text: 'Poblacion Proyectada de Kidscorp Apps por Edad'
+                                            text: 'Kidscorp projected population by age'
                                         },
 
 

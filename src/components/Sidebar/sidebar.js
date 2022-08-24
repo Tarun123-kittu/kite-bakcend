@@ -6,16 +6,20 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 import { faClone } from '@fortawesome/free-solid-svg-icons'
 import { faCalculator } from '@fortawesome/free-solid-svg-icons'
-import { authSelector ,  } from '../../app/features/Auth/authSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faFont } from '@fortawesome/free-solid-svg-icons'
+import { authSelector , clearState , login } from "../../app/features/Auth/authSlice";
 import {useSelector , useDispatch} from 'react-redux';
+
 const Sidebar = () => {
   const {toggleActive} = useSelector(
     authSelector
 );
 const [active, setActive]= useState('false')
+const {type } = useSelector(
+  authSelector
+);
 
 const handleclick = () =>{
   if (document.body.classList.contains('body_toggle')) {
@@ -45,9 +49,12 @@ const handleclick = () =>{
             <NavLink  to='/home' ><div className='nav_icon'><FontAwesomeIcon icon={faLaptop} /></div><span className='ml-2'>Home</span></NavLink >
       
         </li>
-        <li>
+        { type == 1 &&
+          <li>
           <NavLink to="/userlist"><div className='nav_icon'><FontAwesomeIcon icon={faUser} /></div><span className='ml-2'>User</span></NavLink >
         </li>
+        }
+        
         <li>
             <NavLink to="/reports"><div className='nav_icon'><FontAwesomeIcon icon={faFile} /></div><span className='ml-2'>Reports</span></NavLink >
         </li>
@@ -57,9 +64,11 @@ const handleclick = () =>{
         <li>
             <NavLink to="/calculater"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Calculater</span></NavLink >
         </li>
+        { type == 1 &&
         <li>
             <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faFont} /></div><span className='ml-2'>Variable</span></NavLink >
         </li>
+        }
     </ul>
     
     </div>

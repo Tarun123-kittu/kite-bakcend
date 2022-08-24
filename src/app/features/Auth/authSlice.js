@@ -76,6 +76,7 @@ export const authSlice = createSlice({
             state.isSuccess = true;
             state.isLoggedIn = true;
             state.isError=false;
+            state.type = payload.user.type;
             return state;
           },
           [login.rejected]: (state, { payload }) => {

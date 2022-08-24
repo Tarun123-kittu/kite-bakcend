@@ -53,23 +53,37 @@ export const AbstractSlice = createSlice({
         },
     },
     extraReducers: {
-        [fetchabstract.fulfilled]: (state, { payload }) => {
-            state.isFetching = false;
-            state.isSuccess = true;
-            state.status = payload.message;
-            state.incidencia = payload.data.incidencia;
-            state.poblacion_proyectada = payload.data.poblacion_proyectada;
-            state.population_projection_by_age = payload.data.population_projection_by_age;
-            state.use_as_per_age = payload.data.use_as_per_age;
-        },
-        [fetchabstract.pending]: (state) => {
-            state.isFetching = true;
-        },
-        [fetchabstract.rejected]: (state, { payload }) => {
-            state.isFetching = false;
-            state.isError = true;
-            state.errorMessage = payload.message;
-        },
+        [fetchabstract.fulfilled]: (state, { payload }) => ({
+
+            ...state,
+             isFetching: false,
+            isSuccess:true,
+            status:payload.message,
+            incidencia:payload.data.incidencia,
+            poblacion_proyectada:payload.data.poblacion_proyectada,
+            population_projection_by_age:payload.data.population_projection_by_age,
+            use_as_per_age:payload.data.use_as_per_age
+
+            // state.isFetching = false;
+            // state.isSuccess = true;
+            // state.status = payload.message;
+            // state.incidencia = payload.data.incidencia;
+            // state.poblacion_proyectada = payload.data.poblacion_proyectada;
+            // state.population_projection_by_age = payload.data.population_projection_by_age;
+            // state.use_as_per_age = payload.data.use_as_per_age;
+            // return state;
+
+        }),
+        [fetchabstract.pending]: (state) => ({
+            ...state,
+            isFetching: true
+        }),
+        [fetchabstract.rejected]: (state, { payload }) => ({
+            ...state,
+            isFetching:false,
+            isError:true,
+            errorMessage:payload.message
+        }),
     }
 })
 export const { clearState } = AbstractSlice.actions;

@@ -36,11 +36,10 @@ export const indexSlice = createSlice({
         products : [],
         countries : [],
         ageRanges : [],
-        
         error: '',
         isFetching : false,
         isError : false,
-        isSuccess : false,
+        isSuccess : false
         
     },
     reducers : {
@@ -55,24 +54,27 @@ export const indexSlice = createSlice({
     },
     extraReducers : {
       
-        [index.fulfilled]: (state, { payload }) => {
-            state.products=payload.data.products;
-            state.countries=payload.data.countries;
-            state.ageRanges=payload.data.ageRanges;
-            state.isFetching = false;
-            state.isSuccess = true;
-            state.isLoggedIn = true;
-            state.isError=false;
-            return state;
-          },
-          [index.rejected]: (state, { payload }) => {
-            state.isFetching = false;
-            state.isError = true;
-            state.error = payload;
-          },
-          [index.pending]: (state) => {
-            state.isFetching = true;
-          },
+        [index.fulfilled]: (state, { payload }) => ({
+            ...state,
+            products:payload.data.products,
+            countries:payload.data.countries,
+            ageRanges:payload.data.ageRanges,
+            isFetching : false,
+            isSuccess : true,
+            showgraph: true,
+            isLoggedIn : true,
+            isError:false
+          }),
+          [index.rejected]: (state, { payload }) => ({
+            ...state,
+            isFetching:false,
+            isError:true,
+            error:payload
+          }),
+          [index.pending]: (state) => ({
+            ...state,
+            isFetching:true
+          }),
     }
 });
 

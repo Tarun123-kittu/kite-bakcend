@@ -9,7 +9,6 @@ import { reportSelector , clearState ,index } from '../../app/features/Report/re
 import {useSelector , useDispatch} from 'react-redux';
 import axios from "axios";
 
-// const percentage = 66;
 
 const Calculater = () => {
     const [country, setCountry] = useState("pe");
@@ -19,15 +18,20 @@ const Calculater = () => {
     const [projectedPopulation, setProjectedPopulation] = useState("");
     const [percentage, setPercentage] = useState("");
     const [targetPopulation, setTargetPopulation] = useState(0);
+    const [pageload, setPageload] =useState(false)
     const dispatch = useDispatch();
     const {countries,products,ageRanges ,isFetching ,isError ,isSuccess , error } = useSelector(
         reportSelector
     );
+
+
     useEffect(() => {
         dispatch(index({}));
         fetchData();
-
+        
     }, [])
+
+    
 
     let searchquery = `country=${country}&product=${product}&budget=${budget}`;
     const handleCountry=(data)=>{
@@ -57,6 +61,7 @@ const Calculater = () => {
               }
         }
         ).then((response) => {
+            setPageload(true)
             console.log("response--",response.data.data[0])
            setConnectedPopulation(response.data.data[0].connectedPopulation);
            setProjectedPopulation(response.data.data[0].incidence);
@@ -67,18 +72,71 @@ const Calculater = () => {
         });
      }
 
+     const options = {
+
+        chart: {
+            renderTo: 'container',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: null,
+            align: 'center',
+            verticalAlign: 'middle',
+            y: 60
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    distance: -50,
+                    style: {
+                        fontWeight: 'bold',
+                        color: 'white'
+                    }
+                },
+
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'To achieve',
+            innerSize: '50%',
+            data: [
+                ['Target Population', targetPopulation],
+                {
+                    name: 'Other',
+                    y: 100-targetPopulation,
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            ]
+        }]
+
+    };
+
     return (
         <div><div className="content_outer abstract_wrapper">
             <div className="content">
                 <div className="calculaterHeader">
-                    <h6>Resumen</h6>
+                    <h6>Abstract</h6>
 
                 </div>
                 <Row>
                     <Col lg={6}>
                         <div className="graph_grid white_bg">
                             <h5>
-                                Incidencia <img className="icon" src="assets/images/country.png" alt="" />
+                                Incidence <img className="icon" src="assets/images/country.png" alt="" />
                             </h5>
                             <Form.Group className="mb-3 mt-3">
                                 <Form.Select onChange={e => { handleCountry(e.target.value)}} value={country}>
@@ -93,7 +151,7 @@ const Calculater = () => {
                     <Col lg={6}>
                         <div className="graph_grid white_bg">
                             <h5>
-                                Producto <img className="icon" src="assets/images/production.png" alt="" />
+                                Product <img className="icon" src="assets/images/production.png" alt="" />
                             </h5>
                             <Form.Group className="mb-3 mt-3">
                                 <Form.Select onChange={e => { handleProduct(e.target.value)}} value={product}>
@@ -109,14 +167,14 @@ const Calculater = () => {
                 <Row>
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
-                            <h4>Poblacion Conectada</h4>
+                            <h4>Connected Population</h4>
                             {connectedPopulation <= 0 || connectedPopulation == null ? <p className="value">0</p> : <p className="value">{connectedPopulation}</p>}
                       
                         </div>
                     </Col>
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
-                            <h4>Incidencia %</h4>
+                            <h4>Incidence %</h4>
                             <div className="circle_bar">
                                 <CircularProgressbar
                                     value={percentage}
@@ -141,7 +199,7 @@ const Calculater = () => {
                     </Col>
                     <Col lg={4}>
                         <div className="graph_grid white_bg">
-                            <h4>Poblacion Proyectada</h4>
+                            <h4>Projected Population</h4>
                             <p className="value">{Math.round(projectedPopulation)}</p>
                         </div>
                     </Col>
@@ -149,7 +207,7 @@ const Calculater = () => {
                     <Col lg={12}>
                         <div className="graph_grid ">
                             <div className="donald_header">
-                            <h4>Poblacion Proyectada</h4>
+                            <h4>Projected Population</h4>
                             <Form onSubmit={handlebudget} >
                                  <Form.Group className="me-2" controlId="formBasicEmail">
                                      <Form.Control type="text" placeholder="Enter Budget" onChange={e => {setBudget(e.target.value)  }}/>
@@ -159,57 +217,10 @@ const Calculater = () => {
                                 </Button>
                         </Form>
                             </div>
-                            <HighchartsReact highcharts={Highcharts} options={{
-
-                                chart: {
-                                    plotBackgroundColor: null,
-                                    plotBorderWidth: 0,
-                                    plotShadow: false
-                                },
-                                title: {
-                                    text: null,
-                                    align: 'center',
-                                    verticalAlign: 'middle',
-                                    y: 60
-                                },
-                                tooltip: {
-                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                },
-                                accessibility: {
-                                    point: {
-                                        valueSuffix: '%'
-                                    }
-                                },
-                                plotOptions: {
-                                    pie: {
-                                        dataLabels: {
-                                            enabled: true,
-                                            distance: -50,
-                                            style: {
-                                                fontWeight: 'bold',
-                                                color: 'white'
-                                            }
-                                        },
-
-                                    }
-                                },
-                                series: [{
-                                    type: 'pie',
-                                    name: 'To achieve',
-                                    innerSize: '50%',
-                                    data: [
-                                        ['Target Population', targetPopulation],
-                                        {
-                                            name: 'Other',
-                                            y: 100-targetPopulation,
-                                            dataLabels: {
-                                                enabled: false
-                                            }
-                                        }
-                                    ]
-                                }]
-
-                            }} />
+                            {pageload && 
+                            <HighchartsReact highcharts={Highcharts} options={options} />
+                            }
+                            
                         </div>
 
                     </Col>
