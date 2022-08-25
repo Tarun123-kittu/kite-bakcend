@@ -234,7 +234,7 @@ const handleGanderchange=(data) =>{
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: (use_as_per_age?.YouTube) ? JSON.parse(use_as_per_age?.YouTube).map((i)=>({...i, y:parseFloat(i.y)})):{}
+                                                data: (use_as_per_age?.YouTube) ? JSON.parse(use_as_per_age?.YouTube).map((i)=>({...i, name: i.agerange.description, y:parseFloat(i.percentage)})):{}
                                             }
                                         ],
 
@@ -279,7 +279,7 @@ const handleGanderchange=(data) =>{
 
                                         series: [{
                                             name: '',
-                                            data: (population_projection_by_age?.YouTube) ? JSON.parse(population_projection_by_age?.YouTube).map((i)=>{return parseInt(i)}):[]
+                                            data: (population_projection_by_age?.YouTube) ? JSON.parse(population_projection_by_age?.YouTube).map((i)=>{return parseInt(i.connectedpop)}):[]
                                         }],
 
                                         responsive: {
@@ -349,7 +349,7 @@ const handleGanderchange=(data) =>{
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: (use_as_per_age?.Roblox) ? JSON.parse(use_as_per_age?.Roblox).map((i)=>({...i, y:parseFloat(i.y)})):{}
+                                                data: (use_as_per_age?.Roblox) ? JSON.parse(use_as_per_age?.Roblox).map((i)=>({...i, name: i.agerange.description, y:parseFloat(i.percentage)})):{}
                                             }
                                         ],
 
@@ -394,7 +394,7 @@ const handleGanderchange=(data) =>{
 
                                         series: [{
                                             name: '',
-                                            data: (population_projection_by_age?.Roblox) ? JSON.parse(population_projection_by_age?.Roblox).map((i)=>{return parseInt(i)}):[]
+                                            data: (population_projection_by_age?.Roblox) ? JSON.parse(population_projection_by_age?.Roblox).map((i)=>{return parseInt(i.connectedpop)}):[]
                                         }],
 
                                         responsive: {
@@ -464,7 +464,7 @@ const handleGanderchange=(data) =>{
                                             {
                                                 name: "Browsers",
                                                 colorByPoint: true,
-                                                data: (use_as_per_age?.AppsKidscorp) ? JSON.parse(use_as_per_age?.AppsKidscorp).map((i)=>({...i, y:parseFloat(i.y)})) : {}
+                                                data: (use_as_per_age?.AppsKidscorp) ? JSON.parse(use_as_per_age?.AppsKidscorp).map((i)=>({...i, name: i.agerange.description, y:parseFloat(i.percentage)})) : {}
                                             }
                                         ],
 
@@ -509,7 +509,7 @@ const handleGanderchange=(data) =>{
 
                                         series: [{
                                             name: '',
-                                            data: (population_projection_by_age?.AppsKidscorp) ? JSON.parse(population_projection_by_age?.AppsKidscorp).map((i)=>{return parseInt(i)}):[]
+                                            data: (population_projection_by_age?.AppsKidscorp) ? JSON.parse(population_projection_by_age?.AppsKidscorp).map((i)=>{return parseInt(i.connectedpop)}):[]
                                         }],
 
                                         responsive: {
