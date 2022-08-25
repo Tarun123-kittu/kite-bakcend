@@ -9,8 +9,8 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faFont } from '@fortawesome/free-solid-svg-icons'
-import { authSelector , clearState , login } from "../../app/features/Auth/authSlice";
-import {useSelector , useDispatch} from 'react-redux';
+import { authSelector} from "../../app/features/Auth/authSlice";
+import {useSelector } from 'react-redux';
 
 const Sidebar = () => {
   const {toggleActive} = useSelector(
