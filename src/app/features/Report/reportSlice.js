@@ -11,7 +11,6 @@ export const index = createAsyncThunk(
               }}).then( (response) => {
                 return response.data;
               }).catch( (e) => {
-                console.log(e)
                 let error="";
                 if (e.response) {
                     error=e.response.data;

@@ -29,21 +29,18 @@ const genders =[
     // }, [])
 
     useEffect(()=>{
-        console.log(selected,"//", gender)
         dispatch(index({}))
         dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
     }, [selected, gender])
 
 
 const handlecountrychange =(data)=>{
-    console.log(data)
     let selectedcountry= data.map((i)=>{return i.value.toUpperCase()})
     setSelected(data)
     setcountries(selectedcountry)
 }
 
 const handleGanderchange=(data) =>{
-    console.log(data)
     let selectedcountry= data.map((i)=>{return i.value.toUpperCase()})
     setGender(data)
     setfilteredGender(selectedcountry)

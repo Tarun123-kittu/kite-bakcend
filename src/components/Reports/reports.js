@@ -63,7 +63,6 @@ const Reports = () => {
    }
 
    let fetchReports = async () => {
-      console.log(searchquery)
       axios.get(
          `${process.env.REACT_APP_BASE_URL}v1/reports?${searchquery}`, {
             headers: {
@@ -73,7 +72,6 @@ const Reports = () => {
             }
       }
       ).then((response) => {
-         console.log("data--", response.data.data);
          setReports(response.data.data);
       }).catch((error)=>{
          console.log("ERRROR", error);

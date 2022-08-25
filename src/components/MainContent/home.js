@@ -24,7 +24,6 @@ const Home = () => {
    const { overview, cpcv, egRate, ctr, views, impressions, device, format, graph, formats, campaign, isFetching, isSuccess, isError, error } = useSelector(
       dashboardSelector
    );
-   console.log(format)
    useEffect(() => {
       dispatch(fetchdashboard({ filter: "", token: localStorage.getItem('token') }))
    }, [])
@@ -70,7 +69,6 @@ const Home = () => {
    }, [graph])
 
    const graphdraw = () => {
-      console.log("GRAPH")
       var count = graph.length;
       var views = [];
       var impressions = [];
@@ -113,7 +111,6 @@ const Home = () => {
             data: impressions
          }]
       }
-      console.log(chartdata)
       setlinegraph(chartdata);
    }
 

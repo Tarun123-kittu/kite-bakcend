@@ -62,12 +62,10 @@ const Calculater = () => {
         }
         ).then((response) => {
             setPageload(true)
-            console.log("response--",response.data.data[0])
            setConnectedPopulation(response.data.data[0].connectedPopulation);
            setProjectedPopulation(response.data.data[0].incidence);
            setPercentage(Math.round(response.data.data[0].percentage));
            setTargetPopulation(Number(response.data.data[0].target_population));
-            console.log("targetPopulation--",targetPopulation);
            
         });
      }

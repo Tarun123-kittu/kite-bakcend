@@ -40,7 +40,6 @@ const Forgot = () => {
                 toast.error(error.response.data.message);
               });
         }catch (err){
-            console.log(err);
         }
 
     };

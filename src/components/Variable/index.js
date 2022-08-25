@@ -18,7 +18,6 @@ const Variable = () =>{
               'Authorization': 'Bearer '+localStorage.getItem('token')
             }}
           ).then((response)=>{
-                console.log('response', response.data.data[0].cpm)
                 setFrequency(response.data.data[0].frequency) 
                 setCpm(response.data.data[0].cpm) 
                 setId(response.data.data[0].id) 

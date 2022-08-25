@@ -17,7 +17,6 @@ export const fetchabstract = createAsyncThunk(
             })
 
         } catch (e) {
-            console.log(e)
             let error = "";
             if (e.response) {
                 error = e.response.data;

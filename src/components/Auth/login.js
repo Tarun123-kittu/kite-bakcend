@@ -57,36 +57,7 @@ import {useSelector , useDispatch} from 'react-redux';
                 toast.error("Password field is required");
                 return false;
             }
-            // var data = {
-            //     "email": email,
-            //     "password": password
-            //   };
-              
-            //   var config = {
-            //     method: 'post',
-            //     url: `${process.env.REACT_APP_BASE_URL}v1/login`,
-            //     headers: { 
-            //       'Content-Type': 'application/json'
-            //     },
-            //     data : data
-            //   };
               dispatch(login({email , password}))
-            //   await axios(config)
-            //   .then( (response) => {
-            //     localStorage.setItem('token', response.data.access_token);
-            //     console.log("response"+JSON.stringify(response.data));
-            //   })
-            //   .catch( (error) => {
-            //     let keys = Object.keys(error.response.data);
-            //     if(keys[0] == "email"){
-            //         toast.error(error.response.data.email);
-            //     }
-            //     if(keys[0] == "error"){
-            //         toast.error(error.response.data.error);
-            //     }
-                
-            //     console.log("error_data",keys);
-            //   });
         }catch (err){
             console.log(err);
         }
