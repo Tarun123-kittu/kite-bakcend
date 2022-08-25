@@ -29,8 +29,13 @@ const genders =[
     // }, [])
 
     useEffect(()=>{
+        let timer1 = setTimeout(() => {
         dispatch(index({}))
         dispatch(fetchabstract({country: filteredCountries, gender: filteredGender, age: ageRange, token: localStorage.getItem('token')}))
+        },1000);
+      return () => {
+        clearTimeout(timer1);
+      };
     }, [selected, gender])
 
 
