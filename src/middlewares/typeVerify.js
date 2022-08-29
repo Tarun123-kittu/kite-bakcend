@@ -7,8 +7,7 @@ export const VerifyType = ({children}) => {
     const {type } = useSelector(
         authSelector
       );
-
-      if(type == 2){
+      if(localStorage.getItem("type") == 1){
         return  children 
     }else{
         return <Navigate to={{ pathname : '/home' }} />

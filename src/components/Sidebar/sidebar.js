@@ -49,7 +49,7 @@ const handleclick = () =>{
             <NavLink  to='/home' ><div className='nav_icon'><FontAwesomeIcon icon={faLaptop} /></div><span className='ml-2'>Home</span></NavLink >
       
         </li>
-        { type == 1 &&
+        { localStorage.getItem("type") == 1 &&
           <li>
           <NavLink to="/userlist"><div className='nav_icon'><FontAwesomeIcon icon={faUser} /></div><span className='ml-2'>User</span></NavLink >
         </li>
@@ -64,7 +64,7 @@ const handleclick = () =>{
         <li>
             <NavLink to="/calculater"><div className='nav_icon'><FontAwesomeIcon icon={faCalculator} /></div><span className='ml-2'>Calculater</span></NavLink >
         </li>
-        { type == 1 &&
+        { localStorage.getItem("type") == 1 &&
         <li>
             <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faFont} /></div><span className='ml-2'>Variable</span></NavLink >
         </li>

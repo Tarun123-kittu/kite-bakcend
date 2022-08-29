@@ -15,8 +15,8 @@ export const login = createAsyncThunk(
             return await axios.post(`${process.env.REACT_APP_BASE_URL}v1/login` , {email, password},{headers: { 
                 'Content-Type': 'application/json'
               }}).then( (response) => {
-                
                 localStorage.setItem('token', response.data.access_token);
+                localStorage.setItem('type', response.data.user.type);
                 return response.data;
               }).catch( (e) => {
                 let error="";
