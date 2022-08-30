@@ -91,7 +91,7 @@ const Updateuser = () => {
            toast.error("Company field is required");
            return false;
          }
-         if(type.trim() == ""){
+         if(type == ""){
            toast.error("Type field is required");
            return false;
          }
