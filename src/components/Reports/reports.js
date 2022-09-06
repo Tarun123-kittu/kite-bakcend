@@ -137,6 +137,7 @@ const Reports = () => {
            
    }
    const export_table_to_csv = (html, filename) => {
+
       var csv = [];
                 var rows = document.querySelectorAll("table tr");
                 for (var i = 0; i < rows.length; i++) {
@@ -162,8 +163,6 @@ const Reports = () => {
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
    }
-
-   
 
   
    return (
