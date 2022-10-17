@@ -23,6 +23,11 @@ import { VerifyType } from './middlewares/typeVerify';
 import Abstract from './components/Abstract';
 import Calculater from './components/Abstract/calculater';
 import Variable from './components/Variable';
+import CampaignPage from './components/Campaign';
+import Mediaplan from './components/Campaign/mediaplan';
+import CompaignName from './components/Campaign/compaignName';
+import NewCompaign from './components/Campaign/newCompaign';
+import NewLineItem from './components/Campaign/newLineItem';
 function App() {
   return (
 
@@ -36,6 +41,11 @@ function App() {
         <Route exact path="/abstract" element={<VerifyAuth><Sidebar/><Header/><Abstract/></VerifyAuth>} />
         <Route exact path="/calculater" element={<VerifyAuth><Sidebar/><Header/><Calculater/></VerifyAuth>} />
         <Route exact path="/reports" element={<VerifyAuth><Sidebar/><Header/><Reports /></VerifyAuth>} />
+        <Route exact path="/campaign" element={<VerifyAuth><Sidebar/><Header/><CampaignPage /></VerifyAuth>} />
+        <Route exact path="/mediaplan" element={<><Sidebar/><Header/><Mediaplan /></>} />
+        <Route exact path="/newCompaign" element={<><Sidebar/><Header/><NewCompaign /></>} />
+        <Route exact path="/compaignName" element={<><Sidebar/><Header/><CompaignName /></>} />
+        <Route exact path="/newLineItem" element={<><Sidebar/><Header/><NewLineItem /></>} />
         <Route exact path="/variable" element={<VerifyAuth><VerifyType><Sidebar/><Header/><Variable /></VerifyType></VerifyAuth>} />
         <Route exact path="/profile" element={<VerifyAuth><Sidebar/><Header/><Profile /></VerifyAuth>} />
         <Route exact path="/changePassword" element={<VerifyAuth><Sidebar/><Header/><ChangePassword /></VerifyAuth>} />

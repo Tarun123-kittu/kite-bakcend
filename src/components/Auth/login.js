@@ -26,18 +26,19 @@ import {useSelector , useDispatch} from 'react-redux';
             dispatch(clearState());
 
             toast.success("Logged In");
-            navigation("/home");
+            navigation("/campaign");
 
         }
 
         if(isError){
-            let keys = Object.keys(error);
-                if(keys[0] == "email"){
-                    toast.error(error.email);
-                }
-                if(keys[0] == "error"){
-                    toast.error(error.error);
-                }
+            toast.error(error);
+            // let keys = Object.keys(error);
+            //     if(keys[0] == "email"){
+            //         toast.error(error);
+            //     }
+            //     if(keys[0] == "error"){
+            //         toast.error(error);
+            //     }
                 dispatch(clearState());
         }
         
@@ -57,7 +58,7 @@ import {useSelector , useDispatch} from 'react-redux';
                 toast.error("Password field is required");
                 return false;
             }
-              dispatch(login({email , password}))
+              dispatch(login({username: email , password}))
         }catch (err){
             console.log(err);
         }

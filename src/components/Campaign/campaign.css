@@ -1,0 +1,125 @@
+.campiagn_outer,.cmn_border {
+  border: 1px solid #000;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f8f5f5;
+}
+.campiagn_outer .cmn_btn {
+  margin-left: auto;
+}
+.campiagn_filter {
+  background: #fff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+.capiagn_filter {
+    background: #fff;
+    padding: 15px;
+    display: flex;
+    
+}
+
+button.cmn_btn {
+    border: transparent;
+    background: #00e8c9;
+    border-radius: 7px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.add_filter {
+    position: relative;
+    margin-left: 15px;
+}
+.add_filter p {
+ cursor: pointer;
+}
+
+.filter_menu ul {
+    margin: 0;
+}
+
+.filter_menu li {
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.filter_menu button.dropdown-toggle.btn.btn-primary {
+    width: 100%;
+    background: transparent;
+    border: transparent;
+    text-align: left;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0;
+}
+
+.filter_menu button.dropdown-toggle.btn.btn-primary::after {
+    display:none;
+}
+
+.filter_menu button.dropdown-toggle.btn.btn-primary:focus {
+    box-shadow:unset;
+}
+.advertiser {
+    padding: 20px;
+}
+
+.advertiser label {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.advertiser input {
+    margin-bottom: 15px;
+}
+
+.advertiser button {
+    background: transparent;
+    border: transparent;
+    font-size: 16px;
+}
+.filter_menu .dropdown-item {
+    font-size: 16px;
+    padding: 6px 0px;
+    color: #000;
+}
+.dropdown-menu.show{
+    min-width: 160px;
+    padding: 20px 20px;
+}   
+.advert_tabel table.table {
+    background: #fff;
+    border: 1px solid #000;
+    margin-top: 17px;
+}
+.advert_tabel thead{
+    background: #fff;
+}
+
+.advert_tabel thead tr th {
+    font-weight: 600;
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+}
+.advert_tabel tbody tr td {
+    text-align: center;
+}
+.mediaplan_details .advert_tabel tr {
+    border: unset;
+}
+.mediaplan_details .advert_tabel thead tr th,
+.mediaplan_details .advert_tabel tbody tr td {
+  
+    border: unset;
+}
+.content h2 {
+    font-weight: 400;
+    font-size: 23px;
+}

@@ -10,32 +10,59 @@ export const toggle = createAsyncThunk(
 
 export const login = createAsyncThunk(
     'users/login',
-    async({email, password} , thunkAPI) => {
+    async({username, password} , thunkAPI) => {
         try{
-            return await axios.post(`${process.env.REACT_APP_BASE_URL}v1/login` , {email, password},{headers: { 
+            return await axios.post(`${process.env.REACT_APP_DOT_NET_BASE_URL}auth/login` , {username, password},{headers: { 
                 'Content-Type': 'application/json'
               }}).then( (response) => {
-                localStorage.setItem('token', response.data.access_token);
-                localStorage.setItem('type', response.data.user.type);
+                localStorage.setItem('token', response.data.data.token);
+                localStorage.setItem('type', response.data.data.role);
                 return response.data;
               }).catch( (e) => {
                 let error="";
                 if (e.response) {
-                    error=e.response.data;
+                    error=e.response.data.message;
                   } else if (e.request) {
                     error=e.request;
                   } else {
                     error=e.message;
                   }
-
                 return thunkAPI.rejectWithValue(error)
                 
               });
         }catch(error){
-            return thunkAPI.rejectWithValue(error)
+            return thunkAPI.rejectWithValue(error.message)
         }
     }
 )
+// export const login = createAsyncThunk(
+//     'users/login',
+//     async({email, password} , thunkAPI) => {
+//         try{
+//             return await axios.post(`${process.env.REACT_APP_BASE_URL}v1/login` , {email, password},{headers: { 
+//                 'Content-Type': 'application/json'
+//               }}).then( (response) => {
+//                 localStorage.setItem('token', response.data.access_token);
+//                 localStorage.setItem('type', response.data.user.type);
+//                 return response.data;
+//               }).catch( (e) => {
+//                 let error="";
+//                 if (e.response) {
+//                     error=e.response.data;
+//                   } else if (e.request) {
+//                     error=e.request;
+//                   } else {
+//                     error=e.message;
+//                   }
+
+//                 return thunkAPI.rejectWithValue(error)
+                
+//               });
+//         }catch(error){
+//             return thunkAPI.rejectWithValue(error)
+//         }
+//     }
+// )
 
 
 export const authSlice = createSlice({
@@ -75,7 +102,7 @@ export const authSlice = createSlice({
             state.isSuccess = true;
             state.isLoggedIn = true;
             state.isError=false;
-            state.type = payload.user.type;
+            state.type = payload.data.role;
             return state;
           },
           [login.rejected]: (state, { payload }) => {

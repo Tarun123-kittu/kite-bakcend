@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './style.css'
 import {NavLink} from 'react-router-dom'
 import { faLaptop } from '@fortawesome/free-solid-svg-icons'
+import { faBullhorn } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 import { faClone } from '@fortawesome/free-solid-svg-icons'
@@ -45,11 +46,16 @@ const handleclick = () =>{
       </div>
     <ul>
  
-        <li>
+   {/*      <li>
             <NavLink  to='/home' ><div className='nav_icon'><FontAwesomeIcon icon={faLaptop} /></div><span className='ml-2'>Home</span></NavLink >
       
+        </li> */}
+        <li>
+            <NavLink  to='/campaign' ><div className='nav_icon'><FontAwesomeIcon icon={faBullhorn} /></div><span className='ml-2'>Campaign Manager</span></NavLink >
+      
         </li>
-        { localStorage.getItem("type") == 1 &&
+        
+        {/* { localStorage.getItem("type") == 1 &&
           <li>
           <NavLink to="/userlist"><div className='nav_icon'><FontAwesomeIcon icon={faUser} /></div><span className='ml-2'>User</span></NavLink >
         </li>
@@ -68,7 +74,7 @@ const handleclick = () =>{
         <li>
             <NavLink to="/variable"><div className='nav_icon'><FontAwesomeIcon icon={faFont} /></div><span className='ml-2'>Variable</span></NavLink >
         </li>
-        }
+        } */}
     </ul>
     
     </div>
