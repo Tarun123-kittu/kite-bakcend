@@ -10,8 +10,7 @@
 .campiagn_filter {
   background: #fff;
   padding: 15px;
-  display: flex;
-  align-items: center;
+
 }
 .capiagn_filter {
     background: #fff;
@@ -122,4 +121,63 @@ button.cmn_btn {
 .content h2 {
     font-weight: 400;
     font-size: 23px;
+}
+.media_header button {
+    background: transparent;
+    border: transparent;
+}
+
+.media_header button:hover {
+    background: transparent;
+}
+
+.media_header button:focus {box-shadow: unset;outline: unset;background: transparent;}
+
+.media_header button:active:focus {
+    box-shadow: unset !important;
+}
+
+body .media_header .show > .btn-primary.dropdown-toggle {
+    background: transparent;
+}
+
+
+
+body .media_header .btn-primary.dropdown-toggle:focus {box-shadow: unset;}
+.media_dropowns img {
+    width: 29px;
+}
+
+.media_dropowns button {
+    padding: 0;
+}
+.media_dropowns {
+    display: flex;
+    margin-left: auto;
+}
+.media_header {
+    display: flex;
+    align-items: center;
+}
+.owner {
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.advert_tabel ul {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 11px;
+}
+
+.advert_tabel ul li {
+    flex-grow: 1;
+    width: 25%;
+    padding: 3px 5px;
 }
